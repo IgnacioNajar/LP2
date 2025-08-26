@@ -1,0 +1,2 @@
+<?php echo 'hola mundo'; ?> <br />
+<?php echo "Segundo ejemplo"; ?> <hr />
