@@ -186,7 +186,7 @@ $likes = 3139;
 
         </div>
         <!-- /.row -->
-
+      </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
 
