@@ -1,8 +1,8 @@
-<?php 
+<?php
 $Login='suepalacios';
 $Clave='12345678';
 $Provincia='CBA';
-   
+
 $ClaseEstilo='';
 $Mensaje='';
 
@@ -10,7 +10,7 @@ $Mensaje='';
 if ($Login=='suepalacios'  && $Clave=='12345678') {
     $ClaseEstilo='MensajeOk';
     /*
-     * este es un IF anidado: dentro de un IF puedo ir abriendo 
+     * este es un IF anidado: dentro de un IF puedo ir abriendo
     tantas condiciones como necesite */
     if ($Provincia=='CBA') {
         //concateno mas informacion al mensaje de bienvenida
@@ -18,7 +18,7 @@ if ($Login=='suepalacios'  && $Clave=='12345678') {
     }else {
         $Mensaje.="Si usted no es de Cordoba, puede consultar por otros beneficios.";
     }
-    
+
 }else {
     $ClaseEstilo='MensajeError';
     $Mensaje='Los datos de acceso son incorrectos';

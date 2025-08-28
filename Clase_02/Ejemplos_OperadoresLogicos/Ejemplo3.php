@@ -1,15 +1,15 @@
-<?php 
+<?php
 $Login='suepalacios'; //Modifiquen este valor para ver el comportamiento
 $Clave='12345678'; //Modifiquen tambien este valor para ver el comportamiento
 
 //estas variables tomaran valores dependiendo si login y clave son correctos
 $ClaseEstilo='';
-$Mensaje='';    
+$Mensaje='';
 
 if ($Login=='suepalacios'  && $Clave=='12345678') {
     $ClaseEstilo='MensajeOk';
     $Mensaje='Bienvenida al panel!';
-    
+
 }else {
     $ClaseEstilo='MensajeError';
     $Mensaje='Los datos de acceso son incorrectos';

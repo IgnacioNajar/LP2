@@ -1,5 +1,5 @@
 <?php
-$Login = 'suepalacios';   
+$Login = 'suepalacios';
 $Clave = '12345678';
 $Mensaje = '';
 
@@ -15,7 +15,7 @@ define('TITULO', 'Clase 2 Ej 1');
 <html>
     <head>
         <title><?php echo TITULO; ?></title>
-        <meta http-equiv="Content-Type" /> 
+        <meta http-equiv="Content-Type" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
@@ -26,5 +26,3 @@ define('TITULO', 'Clase 2 Ej 1');
         </div>
     </body>
 </html>
-
-
