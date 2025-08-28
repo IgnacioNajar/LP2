@@ -1,5 +1,5 @@
-<?php 
-$Titulo='Condicionales';   
+<?php
+$Titulo='Condicionales';
 ?>
 <html>
     <head>
@@ -11,13 +11,11 @@ $Titulo='Condicionales';
         if ($var==10)  { //si $var vale 10??
             //muestro este mensaje
             echo "La variable vale <b>10</b>.";
-            
+
         }else {  //si la $var no vale 10
             //muestro este otro mensaje
             echo "La variable <b>NO</b> vale 10.";
-        }    
+        }
         ?>
     </body>
 </html>
-
-

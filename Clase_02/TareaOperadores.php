@@ -17,7 +17,7 @@ $tercer_operacion = 'Multiplicar';
 $resultado_multiplicacion = $num1 * $num2;
 
 //Division
-$cuarta_operacion = 'Division';
+$cuarta_operacion = 'Dividir';
 $resultado_division = $num1 / $num2;
 ?>
 

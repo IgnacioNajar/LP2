@@ -1,4 +1,4 @@
-<?php 
+<?php
 $Titulo='Estructuras Condicionales IF';
 $Login='SuePalacios';
 ?>
@@ -10,17 +10,16 @@ $Login='SuePalacios';
         <h3><?php echo $Titulo; ?></h3>
         <?php
         if ($Login=='SuePalacios'){ ?>
-            <p style="color: #007997;">    
+            <p style="color: #007997;">
                 Bienvenida <strong>Sue</strong>
             </p>
-        <?php 
+        <?php
         }else { ?>
             <p style="color: #ff0000" >
                 Usuario incorrecto
             </p>
-        <?php 
+        <?php
         }
         ?>
     </body>
 </html>
-
