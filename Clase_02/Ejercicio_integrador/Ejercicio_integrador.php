@@ -1,3 +1,153 @@
+<?php
+$tipo_destino = 'EUR';
+$mes = 12;
+define('MENSAJE_LUGARES', 'Hotel Deals'); //Constante para el mensaje de cada lugar
+
+//Se definen los destinos y lugares segun el tipo seleccionado
+if ($tipo_destino == 'EXO') { //Destinos Exoticos: 4 lugares
+    $nombre_destino = 'Exoticos';
+    $cantidad_destinos = 4;
+
+    //Datos del primer lugar
+    $titulo_lugar_1 = 'Descubri el Taj Mahal';
+    $nombre_lugar_1 = 'Agra, India';
+    $descripcion_lugar_1 = 'Disfruta el Taj Mahal como nunca antes!';
+    $ruta_img_1 = 'images_countries/EXO_india.JPG';
+    $precio_lugar_1 = 349.00;
+    $cantidad_dias_1 = 7;
+    $cantidad_personas_1 = 2;
+
+    //Datos del segundo lugar
+    $titulo_lugar_2 = 'Descubri Turquia';
+    $nombre_lugar_2 = 'Turquia';
+    $descripcion_lugar_2 = 'Disfruta ver obras arquitectonicas como la de la foto!';
+    $ruta_img_2 = 'images_countries/EXO_turquia.JPG';
+    $precio_lugar_2 = 549.00;
+    $cantidad_dias_2 = 3;
+    $cantidad_personas_2 = 2;
+
+    //Datos del tercer lugar
+    $titulo_lugar_3 = 'Descubri la sabana Sudafrica';
+    $nombre_lugar_3 = 'Sudafrica';
+    $descripcion_lugar_3 = 'Disfruta de un safari como nunca antes!';
+    $ruta_img_3 = 'images_countries/EXO_sudafrica.JPG';
+    $precio_lugar_3 = 549.00;
+    $cantidad_dias_3 = 3;
+    $cantidad_personas_3 = 2;
+
+    //Datos del cuarto lugar
+    $titulo_lugar_4 = 'Descubri Tailandia';
+    $nombre_lugar_4 = 'Tailandia';
+    $descripcion_lugar_4 = 'Disfruta de Tailandia como nunca antes!';
+    $ruta_img_4 = 'images_countries/EXO_tailandia.JPG';
+    $precio_lugar_4 = 649.00;
+    $cantidad_dias_4 = 3;
+    $cantidad_personas_4 = 2;
+
+} elseif ($tipo_destino == 'BRA') { //Destinos en Brasil: 3 lugares
+    $nombre_destino = 'Brasil';
+    $cantidad_destinos = 3;
+
+    //Datos del primer lugar
+    $titulo_lugar_1 = 'Descubri Maceio!';
+    $nombre_lugar_1 = 'Maceio';
+    $descripcion_lugar_1 = 'Disfruta Maceio como nunca antes!';
+    $ruta_img_1 = 'images_countries/BRA_maceio.jpg';
+    $precio_lugar_1 = 349.00;
+    $cantidad_dias_1 = 7;
+    $cantidad_personas_1 = 2;
+
+    //Datos del segundo lugar
+    $titulo_lugar_2 = 'Descubri Rio de Janeiro';
+    $nombre_lugar_2 = 'Rio de Janeiro';
+    $descripcion_lugar_2 = 'Disfruta Rio de Janeiro como nunca antes!';
+    $ruta_img_2 = 'images_countries/BRA_rio.JPG';
+    $precio_lugar_2 = 449.00;
+    $cantidad_dias_2 = 10;
+    $cantidad_personas_2 = 2;
+
+    //Datos del tercer lugar
+    $titulo_lugar_3 = 'Descubri Bahia';
+    $nombre_lugar_3 = 'Salvador de Bahia';
+    $descripcion_lugar_3 = 'Disfruta Bahia como nunca antes!';
+    $ruta_img_3 = 'images_countries/BRA_salvador.JPG';
+    $precio_lugar_3 = 549.00;
+    $cantidad_dias_3 = 3;
+    $cantidad_personas_3 = 2;
+
+} elseif ($tipo_destino == 'EUR') { //Destinos en Europa: 2 lugares
+    $nombre_destino = 'Europa';
+    $cantidad_destinos = 2;
+
+    //Datos del primer lugar
+    $titulo_lugar_1 = 'Descubri Santorini';
+    $nombre_lugar_1 = 'Santorini, Grecia';
+    $descripcion_lugar_1 = 'Disfruta Santorini y sus aguas como nunca antes!';
+    $ruta_img_1 = 'images_countries/EUR_grecia.JPG';
+    $precio_lugar_1 = 349.00;
+    $cantidad_dias_1 = 7;
+    $cantidad_personas_1 = 2;
+
+    //Datos del segundo lugar
+    $titulo_lugar_2 = 'Descubri la ciudad de Roma';
+    $nombre_lugar_2 = 'Roma, Italia';
+    $descripcion_lugar_2 = 'Disfruta la cultura de Italia en su capital como nunca antes!';
+    $ruta_img_2 = 'images_countries/EUR_roma.JPG';
+    $precio_lugar_2 = 449.00;
+    $cantidad_dias_2 = 10;
+    $cantidad_personas_2 = 2;
+
+} else { //Destino incorrecto
+    $nombre_destino = 'Destino no encontrado';
+    $mes = $titulo_lugar_1 = $nombre_lugar_1 = $descripcion_lugar_1 = $ruta_img_1 = '';
+    $precio_lugar_1 = $cantidad_dias_1 = $cantidad_destinos = $cantidad_personas_1 = 0;
+}
+
+//Se define la temporada segun el mes
+switch ($tipo_destino) {
+    case 'EXO':
+        $temporada = ($mes == 1 || $mes == 2 || $mes == 7 || $mes == 8 || $mes == 12)
+            ? 'Temporada alta' : 'Temporada baja';
+        break;
+    case 'BRA':
+        $temporada = ($mes == 1 || $mes == 2 || $mes == 12)
+            ? 'Temporada alta' : 'Temporada baja';
+        break;
+    case 'EUR':
+        $temporada = ($mes == 1 || $mes == 2 || $mes == 8 || $mes == 9 || $mes == 12)
+            ? 'Temporada alta' : 'Temporada baja';
+        break;
+    default:
+        $temporada = 0;
+        break;
+}
+
+//Incremento de precio o no, dependiendo de la temporada
+$incremento = ($temporada == 'Temporada alta') ? 250.00 : 0;
+
+if ($cantidad_destinos >= 1) $precio_final_1 = $precio_lugar_1 + $incremento;
+if ($cantidad_destinos >= 2) $precio_final_2 = $precio_lugar_2 + $incremento;
+if ($cantidad_destinos >= 3) $precio_final_3 = $precio_lugar_3 + $incremento;
+if ($cantidad_destinos >= 4) $precio_final_4 = $precio_lugar_4 + $incremento;
+
+/* Lo mismo pero con switch
+switch ($cantidad_destinos) {
+    case 4:
+        $precio_final_4 = $precio_lugar_4 + $incremento;
+    case 3:
+        $precio_final_3 = $precio_lugar_3 + $incremento;
+    case 2:
+        $precio_final_2 = $precio_lugar_2 + $incremento;
+    case 1:
+        $precio_final_1 = $precio_lugar_1 + $incremento;
+        break;
+    default:
+        $precio_final_1 = $precio_final_2 = $precio_final_3 = $precio_final_4 = 4;
+        break;
+}
+*/
+?>
+
 <!--
 /*
 Mostrar informacion dinamica, de manera que se vea segun los valores de Destino y Mes que se desea consultar:
@@ -50,7 +200,7 @@ Aceptas el desafio? Vamos que puedes!
 
         <!-- Spinner Start -->
         <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <div class="spinner-border text-primary" style="width: 4rem; height: 3rem;" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
         </div>
@@ -202,24 +352,27 @@ Aceptas el desafio? Vamos que puedes!
         <div class="container-fluid packages py-5">
             <div class="container py-5">
                 <div class="mx-auto text-center mb-5" style="max-width: 900px;">
-                    <h5 class="section-title px-3">Brasil</h5>
-                    <h2 class="mb-0">Mes: 9 - Temporada Baja</h2>
+                    <h5 class="section-title px-3"><?= $nombre_destino; ?></h5>
+                    <h2 class="mb-0">Mes: <?= $mes; ?> - <?= $temporada; ?></h2>
                 </div>
                 <div class="packages-carousel owl-carousel">
+
+                <!-- UN destino o mas-->
+                <?php if ($cantidad_destinos >= 1) { ?>
                     <div class="packages-item">
                         <div class="packages-img">
-                            <img src="images_countries/BRA_maceio.jpg" class="img-fluid w-100 rounded-top" alt="Image">
+                            <img src="<?= $ruta_img_1; ?>" class="img-fluid w-100 rounded-top" alt="Image">
                             <div class="packages-info d-flex border border-start-0 border-end-0 position-absolute" style="width: 100%; bottom: 0; left: 0; z-index: 5;">
-                                <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt me-2"></i>Maceio  - Brasil</small>
-                                <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt me-2"></i>7 days</small>
-                                <small class="flex-fill text-center py-2"><i class="fa fa-user me-2"></i>2 Person</small>
+                                <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt me-2"></i><?= $nombre_lugar_1; ?></small>
+                                <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt me-2"></i><?= $cantidad_dias_1; ?> days</small>
+                                <small class="flex-fill text-center py-2"><i class="fa fa-user me-2"></i><?= $cantidad_personas_1; ?> Person</small>
                             </div>
-                            <div class="packages-price py-2 px-4">$349.00</div>
+                            <div class="packages-price py-2 px-4">$<?= number_format($precio_final_1, 2, '.', ''); ?></div>
                         </div>
                         <div class="packages-content bg-light">
                             <div class="p-4 pb-0">
-                                <h5 class="mb-0">Maceio  - Brasil</h5>
-                                <small class="text-uppercase">Hotel Deals</small>
+                                <h5 class="mb-0"><?= $titulo_lugar_1; ?></h5>
+                                <small class="text-uppercase"><?= MENSAJE_LUGARES; ?></small>
                                 <div class="mb-3">
                                     <small class="fa fa-star text-primary"></small>
                                     <small class="fa fa-star text-primary"></small>
@@ -227,7 +380,7 @@ Aceptas el desafio? Vamos que puedes!
                                     <small class="fa fa-star text-primary"></small>
                                     <small class="fa fa-star text-primary"></small>
                                 </div>
-                                <p class="mb-4">La mejor estadia para pasar tus vacaciones!</p>
+                                <p class="mb-4"><?= $descripcion_lugar_1; ?></p>
                             </div>
                             <div class="row bg-primary rounded-bottom mx-0">
                                 <div class="col-6 text-start px-0">
@@ -239,27 +392,31 @@ Aceptas el desafio? Vamos que puedes!
                             </div>
                         </div>
                     </div>
+                    <?php } ?> <!-- Finaliza bloque IF PHP -->
+
+                    <!-- DOS destinos o mas-->
+                    <?php if ($cantidad_destinos >= 2) { ?>
                     <div class="packages-item">
                         <div class="packages-img">
-                            <img src="images_countries/BRA_rio.JPG" class="img-fluid w-100 rounded-top" alt="Image">
+                            <img src="<?= $ruta_img_2; ?>" class="img-fluid w-100 rounded-top" alt="Image">
                             <div class="packages-info d-flex border border-start-0 border-end-0 position-absolute" style="width: 100%; bottom: 0; left: 0; z-index: 5;">
-                                <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt me-2"></i>Rio de Janeiro - Brasil</small>
-                                <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt me-2"></i>10 days</small>
-                                <small class="flex-fill text-center py-2"><i class="fa fa-user me-2"></i>2 Person</small>
+                                <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt me-2"></i><?= $nombre_lugar_2; ?></small>
+                                <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt me-2"></i><?= $cantidad_dias_2; ?> days</small>
+                                <small class="flex-fill text-center py-2"><i class="fa fa-user me-2"></i><?= $cantidad_personas_2; ?> Person</small>
                             </div>
-                            <div class="packages-price py-2 px-4">$449.00</div>
+                            <div class="packages-price py-2 px-4">$<?= number_format($precio_final_2, 2, '.', ''); ?></div>
                         </div>
                         <div class="packages-content bg-light">
                             <div class="p-4 pb-0">
-                                <h5 class="mb-0">The New Rio</h5>
-                                <small class="text-uppercase">Hotel Deals</small>
+                                <h5 class="mb-0"><?= $titulo_lugar_2; ?></h5>
+                                <small class="text-uppercase"><?= MENSAJE_LUGARES; ?></small>
                                 <div class="mb-3">
                                     <small class="fa fa-star text-primary"></small>
                                     <small class="fa fa-star text-primary"></small>
                                     <small class="fa fa-star text-primary"></small>
                                     <small class="fa fa-star text-primary"></small>
                                 </div>
-                                <p class="mb-4">Vista plena al mar!</p>
+                                <p class="mb-4"><?= $descripcion_lugar_2; ?></p>
                             </div>
                             <div class="row bg-primary rounded-bottom mx-0">
                                 <div class="col-6 text-start px-0">
@@ -271,73 +428,81 @@ Aceptas el desafio? Vamos que puedes!
                             </div>
                         </div>
                     </div>
-                    <div class="packages-item">
-                        <div class="packages-img">
-                            <img src="images_countries/BRA_salvador.JPG" class="img-fluid w-100 rounded-top" alt="Image">
-                            <div class="packages-info d-flex border border-start-0 border-end-0 position-absolute" style="width: 100%; bottom: 0; left: 0; z-index: 5;">
-                                <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt me-2"></i>Salvador de Bahia - Brasil</small>
-                                <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt me-2"></i>3 days</small>
-                                <small class="flex-fill text-center py-2"><i class="fa fa-user me-2"></i>2 Person</small>
-                            </div>
-                            <div class="packages-price py-2 px-4">$549.00</div>
-                        </div>
-                        <div class="packages-content bg-light">
-                            <div class="p-4 pb-0">
-                                <h5 class="mb-0">Discover Bahia!</h5>
-                                <small class="text-uppercase">Hotel Saint Martin</small>
-                                <div class="mb-3">
-                                    <small class="fa fa-star text-primary"></small>
-                                    <small class="fa fa-star text-primary"></small>
-                                    <small class="fa fa-star text-primary"></small>
-                                    <small class="fa fa-star text-primary"></small>
-                                    <small class="fa fa-star text-primary"></small>
+                    <?php } ?> <!-- Finaliza bloque PHP -->
+
+                    <!-- TRES destinos o mas-->
+                    <?php if ($cantidad_destinos >= 3) { ?>
+                        <div class="packages-item">
+                            <div class="packages-img">
+                                <img src="<?= $ruta_img_3; ?>" class="img-fluid w-100 rounded-top" alt="Image">
+                                <div class="packages-info d-flex border border-start-0 border-end-0 position-absolute" style="width: 100%; bottom: 0; left: 0; z-index: 5;">
+                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt me-2"></i><?= $nombre_lugar_3; ?></small>
+                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt me-2"></i><?= $cantidad_dias_3; ?> days</small>
+                                    <small class="flex-fill text-center py-2"><i class="fa fa-user me-2"></i><?= $cantidad_personas_3; ?> Person</small>
                                 </div>
-                                <p class="mb-4">La mejor vista!</p>
+                                <div class="packages-price py-2 px-4">$<?= number_format($precio_final_3, 2, '.', ''); ?></div>
                             </div>
-                            <div class="row bg-primary rounded-bottom mx-0">
-                                <div class="col-6 text-start px-0">
-                                    <a href="#" class="btn-hover btn text-white py-2 px-4">Read More</a>
+                            <div class="packages-content bg-light">
+                                <div class="p-4 pb-0">
+                                    <h5 class="mb-0"><?= $titulo_lugar_3; ?></h5>
+                                    <small class="text-uppercase"><?= MENSAJE_LUGARES; ?></small>
+                                    <div class="mb-3">
+                                        <small class="fa fa-star text-primary"></small>
+                                        <small class="fa fa-star text-primary"></small>
+                                        <small class="fa fa-star text-primary"></small>
+                                        <small class="fa fa-star text-primary"></small>
+                                        <small class="fa fa-star text-primary"></small>
+                                    </div>
+                                    <p class="mb-4"><?= $descripcion_lugar_3; ?></p>
                                 </div>
-                                <div class="col-6 text-end px-0">
-                                    <a href="#" class="btn-hover btn text-white py-2 px-4">Book Now</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--
-                    <div class="packages-item">
-                        <div class="packages-img">
-                            <img src="img/packages-1.jpg" class="img-fluid w-100 rounded-top" alt="Image">
-                            <div class="packages-info d-flex border border-start-0 border-end-0 position-absolute" style="width: 100%; bottom: 0; left: 0; z-index: 5;">
-                                <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt me-2"></i>Thayland</small>
-                                <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt me-2"></i>3 days</small>
-                                <small class="flex-fill text-center py-2"><i class="fa fa-user me-2"></i>2 Person</small>
-                            </div>
-                            <div class="packages-price py-2 px-4">$649.00</div>
-                        </div>
-                        <div class="packages-content bg-light">
-                            <div class="p-4 pb-0">
-                                <h5 class="mb-0">Thayland Trip</h5>
-                                <small class="text-uppercase">Hotel Deals</small>
-                                <div class="mb-3">
-                                    <small class="fa fa-star text-primary"></small>
-                                    <small class="fa fa-star text-primary"></small>
-                                    <small class="fa fa-star text-primary"></small>
-                                    <small class="fa fa-star text-primary"></small>
-                                    <small class="fa fa-star text-primary"></small>
-                                </div>
-                                <p class="mb-4">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt nemo quia quae illum aperiam fugiat voluptatem repellat</p>
-                            </div>
-                            <div class="row bg-primary rounded-bottom mx-0">
-                                <div class="col-6 text-start px-0">
-                                    <a href="#" class="btn-hover btn text-white py-2 px-4">Read More</a>
-                                </div>
-                                <div class="col-6 text-end px-0">
-                                    <a href="#" class="btn-hover btn text-white py-2 px-4">Book Now</a>
+                                <div class="row bg-primary rounded-bottom mx-0">
+                                    <div class="col-6 text-start px-0">
+                                        <a href="#" class="btn-hover btn text-white py-2 px-4">Read More</a>
+                                    </div>
+                                    <div class="col-6 text-end px-0">
+                                        <a href="#" class="btn-hover btn text-white py-2 px-4">Book Now</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div> -->
+                    <?php } ?> <!-- Finaliza bloque PHP -->
+
+                    <!-- CUATRO destinos o mas-->
+                    <?php if ($cantidad_destinos >= 4) { ?>
+                        <div class="packages-item">
+                            <div class="packages-img">
+                                <img src="<?= $ruta_img_4; ?>" class="img-fluid w-100 rounded-top" alt="Image">
+                                <div class="packages-info d-flex border border-start-0 border-end-0 position-absolute" style="width: 100%; bottom: 0; left: 0; z-index: 5;">
+                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt me-2"></i><?= $nombre_lugar_4; ?></small>
+                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt me-2"></i><?= $cantidad_dias_4; ?> days</small>
+                                    <small class="flex-fill text-center py-2"><i class="fa fa-user me-2"></i><?= $cantidad_personas_4; ?> Person</small>
+                                </div>
+                                <div class="packages-price py-2 px-4">$<?= number_format($precio_final_4, 2, '.', ''); ?></div>
+                            </div>
+                            <div class="packages-content bg-light">
+                                <div class="p-4 pb-0">
+                                    <h5 class="mb-0"><?= $titulo_lugar_4; ?></h5>
+                                    <small class="text-uppercase"><?= MENSAJE_LUGARES; ?></small>
+                                    <div class="mb-3">
+                                        <small class="fa fa-star text-primary"></small>
+                                        <small class="fa fa-star text-primary"></small>
+                                        <small class="fa fa-star text-primary"></small>
+                                        <small class="fa fa-star text-primary"></small>
+                                        <small class="fa fa-star text-primary"></small>
+                                    </div>
+                                    <p class="mb-4"><?= $descripcion_lugar_4; ?></p>
+                                </div>
+                                <div class="row bg-primary rounded-bottom mx-0">
+                                    <div class="col-6 text-start px-0">
+                                        <a href="#" class="btn-hover btn text-white py-2 px-4">Read More</a>
+                                    </div>
+                                    <div class="col-6 text-end px-0">
+                                        <a href="#" class="btn-hover btn text-white py-2 px-4">Book Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?> <!-- Finaliza bloque PHP -->
                 </div>
             </div>
         </div>
