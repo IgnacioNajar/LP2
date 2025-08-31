@@ -1,0 +1,10 @@
+.instruction {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+hr {
+    width: 5em;
+    margin-left: 0;
+    margin-right: auto;
+}
