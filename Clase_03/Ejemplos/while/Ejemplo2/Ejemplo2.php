@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html" /> 
+        <meta http-equiv="Content-Type" content="text/html" />
         <title> Ejercicio 2</title>
     </head>
     <body>

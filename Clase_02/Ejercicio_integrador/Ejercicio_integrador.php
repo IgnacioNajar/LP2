@@ -142,7 +142,7 @@ switch ($cantidad_destinos) {
         $precio_final_1 = $precio_lugar_1 + $incremento;
         break;
     default:
-        $precio_final_1 = $precio_final_2 = $precio_final_3 = $precio_final_4 = 4;
+        $precio_final_1 = $precio_final_2 = $precio_final_3 = $precio_final_4 = 0;
         break;
 }
 */

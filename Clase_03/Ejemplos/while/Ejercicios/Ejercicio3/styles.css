@@ -1,0 +1,20 @@
+.h4-like {
+            font-size: 1em;
+            font-weight: bold;
+            margin: 0.1em 0;
+}
+
+#p1 {
+    margin-top: 1.5em;
+    margin-bottom: 0.1em;
+}
+
+#p2 {
+    margin-top: 0.1em;
+}
+
+hr {
+    width: 13em;
+    margin-left: 0;
+    margin-right: auto;
+}
