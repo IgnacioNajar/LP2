@@ -1,0 +1,23 @@
+.instructions {
+    font-size: 1em;
+    font-weight: bold;
+    margin: 0.5em 0;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+li p {
+    margin: 0.2em 0;
+}
+
+
+span {
+    font-weight: bold;
+}
+
+#exercise-output {
+    margin-top: 1.5em;
+}

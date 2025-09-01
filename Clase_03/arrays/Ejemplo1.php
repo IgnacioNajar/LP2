@@ -1,14 +1,14 @@
 <?php
-//una forma de darle valores a un array   
+//una forma de darle valores a un array
 $Marcas = array(  0 => "Adidas",
                     1 => "Nike",
                     2 => "Topper",
                     3 => "Reebok"
                 );
 /*
-Noten la sintaxis: 
-a la variable $Marcas le es asignado un array que contiene las posiciones 
-con sus correspondientes valores, definidos entre los parentesis. 
+Noten la sintaxis:
+a la variable $Marcas le es asignado un array que contiene las posiciones
+con sus correspondientes valores, definidos entre los parentesis.
 Para asignar el par ordenado indice/valor se usa el igual seguido del mayor '=>'
 Para separar cada elemento se una coma ','
 Al finalizar la sentencia va un punto y coma ';'
@@ -17,7 +17,7 @@ Al finalizar la sentencia va un punto y coma ';'
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html" charset="utf-8" /> 
+        <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
         <title> Arrays </title>
     </head>
     <body>

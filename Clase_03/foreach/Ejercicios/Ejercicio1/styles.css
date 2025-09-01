@@ -1,0 +1,25 @@
+#instructions {
+    font-size: 1em;
+    font-weight: bold;
+}
+
+#italic {
+    font-style: italic;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+span {
+    margin-left: 1em;
+}
+
+.flag-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0.2em 0;
+    border-bottom: 1px solid #000;
+}

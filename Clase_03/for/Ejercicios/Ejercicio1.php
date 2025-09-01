@@ -1,7 +1,7 @@
 <?php
 $i = 1;
 $number = 5;
-$list_html;
+$list_html = '';
 
 for ($i = 1; $i <= 10; $i++) {
     $resultado = $i * $number;
