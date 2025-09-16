@@ -1,7 +1,7 @@
 /* ----- Logo ----- */
 
 #logo a {
-	background-image:url('../images/wflogo.png'); 
+	background-image:url('../images/wflogo.png');
 	min-height:0;
 }
 * html #logo a {/* IE6 png Support */
@@ -139,7 +139,7 @@ li.leftThird small, li.middleThird small, li.rightThird small,
 
 .wufoo li.focused label.desc, .wufoo li.focused legend.desc,
 .wufoo li.focused div, .wufoo li.focused span, .wufoo li.focused div label, .wufoo li.focused span label,
-.safari .wufoo li.focused input.file{ 
+.safari .wufoo li.focused input.file{
 	color:#000000;
 }
 
@@ -276,7 +276,7 @@ a.powertiny b, a.powertiny em{
 	border-color:#cccccc;
 }
 .fc table{
-	border-left:1px solid #dedede;	
+	border-left:1px solid #dedede;
 }
 .fc thead th, .fc .more th{
 	background-color:#dedede !important;
@@ -296,9 +296,9 @@ a.powertiny b, a.powertiny em{
 .fc caption, .fcNav, .fcNav a{
 	color:#444444;
 }
-.fc tfoot, 
+.fc tfoot,
 .fc thead th,
-.fc tbody th div, 
+.fc tbody th div,
 .fc tbody td.count, .fc .cards tbody td a, .fc td.percent var,
 .fc .timestamp span{
 	color:#000000;
@@ -323,7 +323,7 @@ a.powertiny b, a.powertiny em{
 
 /* ----- Payment Summary ----- */
 
-.invoice thead th, 
+.invoice thead th,
 .invoice tbody th, .invoice tbody td,
 .invoice tfoot th,
 .invoice .total,
@@ -360,4 +360,3 @@ a.powertiny b, a.powertiny em{
 }
 
 /* - - - Custom Theme - - - */
-

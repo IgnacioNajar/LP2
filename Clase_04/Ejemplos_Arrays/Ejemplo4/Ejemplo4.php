@@ -103,25 +103,26 @@ $CantidadPersonas = count($Personas);
                                 $MontoCobrar=0;
                                 for ($i = 0; $i < $CantidadPersonas; $i++) {
                                     ?>
-                                    <tr>    
+                                    <tr>
                                         <td><?php echo ($i+1); //indica la primer columna con el nro de registro ?></td>
                                         <td><?php echo $Personas[$i]['Apellido']; ?></td>
                                         <td><?php echo $Personas[$i]['Nombre']; ?></td>
                                         <td> $ <?php echo $Personas[$i]['Monto_Hora']; ?></td>
                                         <td><?php echo $Personas[$i]['Horas_Trabajadas']; ?> hs.</td>
                                         <td> $ <?php echo $Personas[$i]['Total_Ventas']; ?> </td>
-                                        
-                                        <?php 
+
+                                        <?php
                                         //calcula cuanto le corresponde cobrar por esas horas con ese monto
                                         $MontoCobrar = $Personas[$i]['Monto_Hora'] * $Personas[$i]['Horas_Trabajadas']; ?>
                                         <td style="color: #0000ff"> $ <?php echo $MontoCobrar; ?></td>
-                                        
+
                                         <?php
                                         $Incentivo='No';
                                         $Color='#f00';
-                                        if ($Personas[$i]['Total_Ventas'] >= 35000) { 
+                                        if ($Personas[$i]['Total_Ventas'] >= 35000) {
                                             $Incentivo='Si';
                                             $Color='#25a82b';
+                                            $MontoCobrar += 10000;
                                         } ?>
                                         <td style="color: <?php echo $Color; ?>" >
                                             <?php echo $Incentivo; ?>
@@ -135,7 +136,7 @@ $CantidadPersonas = count($Personas);
 
 
                 </ul>
-            </form> 
+            </form>
 
         </div><!--container-->
 

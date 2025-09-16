@@ -55,50 +55,7 @@
                     <li id="foli5" class="likert notranslate col5">
 
                         <table border="1">
-                            <thead>
-                                <tr>
-                                    <td>#</td>
-                                    <td>Nombre Pelicula </td>
-                                    <td>Productora </td>
-                                    <td>Taquilla en EEUU</td>
-                                    <td>Taquilla fuera de EEUU</td>
-                                    <td>Año de estreno</td>
-                                    <td><strong>Recaudación mundial</strong></td>
-                                </tr>
-
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Avatar</td>
-                                    <td>20th Century Fox</td>
-                                    <td> $ 785221649 </td>
-                                    <td> $ 2138484377</td>
-                                    <td>2009</td>
-                                    <td>$ (calcular) </td>
-
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Avengers: Endgame</td>
-                                    <td>Marvel Studios/Walt Disney Pictures</td>
-                                    <td> $ 858373000 </td>
-                                    <td> $ 1941066100 </td>
-                                    <td>2019</td>
-                                    <td>$ (calcular) </td>
-
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Avatar: The Way of Water</td>
-                                    <td>Marvel Studios/Walt Disney Pictures</td>
-                                    <td> $ 684075767 </td>
-                                    <td> $ 1636174514 </td>
-                                    <td>2022</td>
-                                    <td>$ (calcular) </td>
-
-                                </tr>
-                            </tbody>
+                            
                         </table>
                     </li>
                 </ul>

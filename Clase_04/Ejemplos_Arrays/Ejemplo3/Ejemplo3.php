@@ -14,13 +14,17 @@ $Personas[2]['Nombre'] = "Roberto";
 $Personas[2]['Apellido'] = "Perez";
 $Personas[2]['Imagen'] ='pinkpanther.png';
 
+$Personas[2]['Nombre'] = "Bellota";
+$Personas[2]['Apellido'] = "";
+$Personas[2]['Imagen'] ='bellota.jpg';
+
 $CantidadPersonas = count($Personas);
 ?>
 <!DOCTYPE html>
 <html>
     <head>
         <title>
-            Ejemplo 3 - Recorrer array 
+            Ejemplo 3 - Recorrer array
         </title>
 
         <!-- Meta Tags -->
@@ -54,7 +58,7 @@ $CantidadPersonas = count($Personas);
                     <div>Recorrer el array para mostrar sus elementos en una tabla</div>
                 </header>
 
-                <ul>    
+                <ul>
 
                     <li id="foli3" class="notranslate       ">
                         Ubicamos los elementos del array de otra manera: en una tabla
@@ -73,8 +77,8 @@ $CantidadPersonas = count($Personas);
                             <thead>
                                 <tr>
                                     <td>#</td>
-                                    <td>Apellido </td>
                                     <td>Nombre </td>
+                                    <td>Apellido </td>
                                     <td>Imagen </td>
                                 </tr>
                             </thead>
@@ -84,8 +88,8 @@ $CantidadPersonas = count($Personas);
                                     ?>
                                     <tr>
                                         <td><?php echo ($i+1); //indica la primer columna con el nro de registro ?></td>
-                                        <td><?php echo $Personas[$i]['Apellido']; ?></td>
                                         <td><?php echo $Personas[$i]['Nombre']; ?></td>
+                                        <td><?php echo $Personas[$i]['Apellido']; ?></td>
                                         <td> <img src='imagenes/<?php echo $Personas[$i]['Imagen']; ?>' /> </td>
                                     </tr>
                                 <?php } //fin del FOR ?>
@@ -96,7 +100,7 @@ $CantidadPersonas = count($Personas);
 
 
                 </ul>
-            </form> 
+            </form>
 
         </div><!--container-->
 
