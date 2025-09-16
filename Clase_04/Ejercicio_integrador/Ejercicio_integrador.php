@@ -1,4 +1,58 @@
+<?php
+    $redes_sociales = [
+        //Twitter
+        ["red_social" => "https://x.com/travellaviajes.oficial",
+        "tooltip" => "Icono de Twitter",
+        "icono" => "fab fa-twitter fw-normal"],
+        //Facebook
+        ["red_social" => "https://facebook.com/travellaviajes.oficial",
+        "tooltip" => "Icono de Facebook",
+        "icono" => "fab fa-facebook fw-normal"],
+        //Linkedin
+        ["red_social" => " https://ar.linkedin.com/travellaviajes",
+        "tooltip" => "Icono de Linkedin",
+        "icono" => "fab fa-linkedin fw-normal"],
+        //Instagram
+        ["red_social" => "https://instragram.com/travellaviajes",
+        "tooltip" => "Icono de Instagram",
+        "icono" => "fab fa-instagram fw-normal"],
+        //Youtube
+        ["red_social" => "https://youtube.com/travellaviajes/videos",
+        "tooltip" => "Icono de youtube",
+        "icono" => "fab fa-youtube fw-normal"],
+    ];
 
+    $lista_destinos = [
+        //Destino 1
+        ["imagen" => "images_countries/BRA_maceio.jpg",
+        "precio" => 349,
+        "ciudad_pais" => "Maceio - Brasil",
+        "cantidad_dias" => 7,
+        "cantidad_personas" => 2,
+        "nombre_hotel" => "HOTEL DEALS",
+        "cantidad_estrellas" => 4,
+        "descripcion" => "Hermosa vista plena al mar."],
+        //Destino 2
+        ["imagen" => "images_countries/BRA_rio.jpg",
+        "precio" => 449,
+        "ciudad_pais" => "Rio de Janeiro - Brasil",
+        "cantidad_dias" => 10,
+        "cantidad_personas" => 2,
+        "nombre_hotel" => "HOTEL SAINT MICHELLE",
+        "cantidad_estrellas" => 5,
+        "descripcion" => "La mejor estadía frente al mar y sus atardeceres."],
+        //Destino 3
+        ["imagen" => "images_countries/BRA_salvador.jpg",
+        "precio" => 549,
+        "ciudad_pais" => "Salvador de Bahía - Brasil",
+        "cantidad_dias" => 3,
+        "cantidad_personas" => 2,
+        "nombre_hotel" => "HOTEL SAINT MARTIN",
+        "cantidad_estrellas" => 3,
+        "descripcion" => "Disfruta tu mejor estadía"]
+    ];
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -46,28 +100,14 @@
             <div class="row gx-0">
                 <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
                     <div class="d-inline-flex align-items-center" style="height: 45px;">
-
-                                                <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2"
-                             href="https://x.com/travellaviajes.oficial" title="Twitter">
-                             <i class="fab fa-twitter fw-normal"></i>
-                        </a>
-                                                <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2"
-                             href="Facebook: https://facebook.com/travellaviajes.oficial" title="Facebook">
-                             <i class="fab fa-twitter fw-normal"></i>
-                        </a>
-                                                <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2"
-                             href="https://ar.linkedin.com/travellaviajes" title="Linkedin">
-                             <i class="fab fa-linkedin-in fw-normal"></i>
-                        </a>
-                                                <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2"
-                             href="https://instragram.com/travellaviajes" title="Instagram">
-                             <i class="fab fa-instagram fw-normal"></i>
-                        </a>
-                                                <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2"
-                             href="https://youtube.com/travellaviajes/videos" title="Youtube">
-                             <i class="fab fa-youtube fw-normal"></i>
-                        </a>
-                                            </div>
+                        <?php foreach ($redes_sociales as $indice => $red_social): ?>
+                            <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2"
+                            href="<?= $red_social["red_social"]; ?>"
+                            title="<?= $red_social["tooltip"]; ?>">
+                                <i class="<?= $red_social["icono"]; ?>"></i>
+                            </a>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
                 <div class="col-lg-4 text-center text-lg-end">
                     <div class="d-inline-flex align-items-center" style="height: 45px;">
@@ -206,26 +246,39 @@
                     <h5 class="section-title px-3">Brasil</h5>
                     <h1 class="mb-0">Mes: 9 - Temporada Baja</h1>
                 </div>
+
                 <div class="packages-carousel owl-carousel">
 
-                                    <div class="packages-item">
-                        <div class="packages-img">
-                            <img src="images_countries/BRA_maceio.jpg" class="img-fluid w-100 rounded-top" alt="Image">
-                            <div class="packages-info d-flex border border-start-0 border-end-0 position-absolute" style="width: 100%; bottom: 0; left: 0; z-index: 5;">
-                                <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt me-2"></i>Maceio - Brasil </small>
-                                <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt me-2"></i>7 days</small>
-                                <small class="flex-fill text-center py-2"><i class="fa fa-user me-2"></i>2 Person</small>
+                    <!-- Apertura foreach php -->
+                    <?php foreach ($lista_destinos as $indice => $destino): ?>
+
+                        <div class="packages-item">
+
+                            <div class="packages-img">
+                                <img src="<?= $destino["imagen"]; ?>"
+                                class="img-fluid w-100 rounded-top"
+                                alt="Image">
+
+                                <div class="packages-info d-flex border border-start-0 border-end-0 position-absolute" style="width: 100%; bottom: 0; left: 0; z-index: 5;">
+                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt me-2"></i><?= $destino["ciudad_pais"]; ?></small>
+                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt me-2"></i><?= $destino["cantidad_dias"]; ?>days</small>
+                                    <small class="flex-fill text-center py-2"><i class="fa fa-user me-2"></i><?= $destino["cantidad_dias"]; ?> Person</small>
+                                </div>
+
+                                <div class="packages-price py-2 px-4">$<?= number_format($destino["precio"], 2, ".", ","); ?></div>
+
                             </div>
-                            <div class="packages-price py-2 px-4">$ 349</div>
-                        </div>
 
-                        <div class="packages-content bg-light">
-                            <div class="p-4 pb-0">
-                                <h5 class="mb-0">Maceio - Brasil</h5>
-                                <small class="text-uppercase">Hotel Deals </small>
-                                <div class="mb-3">
-                                    4 <small class="fa fa-star text-primary"></small>
+                            <div class="packages-content bg-light">
 
+                                <div class="p-4 pb-0">
+                                    <h5 class="mb-0"><?= $destino["ciudad_pais"]; ?></h5>
+                                    <small class="text-uppercase"><?= $destino["nombre_hotel"]; ?></small>
+
+                                    <div class="mb-3">
+                                        <?php for ($i = 1; $i <= $destino["cantidad_estrellas"]; $i++): ?>
+                                            <small class="fa fa-star text-primary"></small>
+                                        <?php endfor; ?>
                                     <!--Para ver el nro solo:
                                     Nro de Estrellas <small class="fa fa-star text-primary"></small>
                                     -->
@@ -237,111 +290,29 @@
                                     <small class="fa fa-star text-primary"></small>
                                     <small class="fa fa-star text-primary"></small>
                                     -->
+                                    </div>
+
+                                    <p class="mb-4"><?= $destino["descripcion"]; ?></p>
+                                </div>
+
+                                <div class="row bg-primary rounded-bottom mx-0">
+
+                                    <div class="col-6 text-start px-0">
+                                        <a href="#" class="btn-hover btn text-white py-2 px-4">Read More</a>
+                                    </div>
+
+                                    <div class="col-6 text-end px-0">
+                                        <a href="#" class="btn-hover btn text-white py-2 px-4">Book Now</a>
+                                    </div>
 
                                 </div>
-                                <p class="mb-4">Hermosa vista plena al mar.</p>
+
                             </div>
-                            <div class="row bg-primary rounded-bottom mx-0">
-                                <div class="col-6 text-start px-0">
-                                    <a href="#" class="btn-hover btn text-white py-2 px-4">Read More</a>
-                                </div>
-                                <div class="col-6 text-end px-0">
-                                    <a href="#" class="btn-hover btn text-white py-2 px-4">Book Now</a>
-                                </div>
-                            </div>
+
                         </div>
-
-                    </div>
-
-                                    <div class="packages-item">
-                        <div class="packages-img">
-                            <img src="images_countries/BRA_rio.JPG" class="img-fluid w-100 rounded-top" alt="Image">
-                            <div class="packages-info d-flex border border-start-0 border-end-0 position-absolute" style="width: 100%; bottom: 0; left: 0; z-index: 5;">
-                                <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt me-2"></i>Rio de Janeiro - Brasil </small>
-                                <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt me-2"></i>10 days</small>
-                                <small class="flex-fill text-center py-2"><i class="fa fa-user me-2"></i>2 Person</small>
-                            </div>
-                            <div class="packages-price py-2 px-4">$ 449</div>
-                        </div>
-
-                        <div class="packages-content bg-light">
-                            <div class="p-4 pb-0">
-                                <h5 class="mb-0">Rio de Janeiro - Brasil</h5>
-                                <small class="text-uppercase">Hotel Saint Michelle </small>
-                                <div class="mb-3">
-                                    5 <small class="fa fa-star text-primary"></small>
-
-                                    <!--Para ver el nro solo:
-                                    Nro de Estrellas <small class="fa fa-star text-primary"></small>
-                                    -->
-
-                                    <!--
-                                    Para ver tantas estrellas: (se repite cuantas tenga)
-                                    Puedes generar otro ciclo repetitivo aqui para que repita cada estrella, tantas veces:
-                                    <small class="fa fa-star text-primary"></small>
-                                    <small class="fa fa-star text-primary"></small>
-                                    <small class="fa fa-star text-primary"></small>
-                                    -->
-
-                                </div>
-                                <p class="mb-4">La mejor estadia frente al mar y sus atardeceres. </p>
-                            </div>
-                            <div class="row bg-primary rounded-bottom mx-0">
-                                <div class="col-6 text-start px-0">
-                                    <a href="#" class="btn-hover btn text-white py-2 px-4">Read More</a>
-                                </div>
-                                <div class="col-6 text-end px-0">
-                                    <a href="#" class="btn-hover btn text-white py-2 px-4">Book Now</a>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                                    <div class="packages-item">
-                        <div class="packages-img">
-                            <img src="images_countries/BRA_salvador.JPG" class="img-fluid w-100 rounded-top" alt="Image">
-                            <div class="packages-info d-flex border border-start-0 border-end-0 position-absolute" style="width: 100%; bottom: 0; left: 0; z-index: 5;">
-                                <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt me-2"></i>Salvador de Bahia - Brasil </small>
-                                <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt me-2"></i>3 days</small>
-                                <small class="flex-fill text-center py-2"><i class="fa fa-user me-2"></i>2 Person</small>
-                            </div>
-                            <div class="packages-price py-2 px-4">$ 549</div>
-                        </div>
-
-                        <div class="packages-content bg-light">
-                            <div class="p-4 pb-0">
-                                <h5 class="mb-0">Salvador de Bahia - Brasil</h5>
-                                <small class="text-uppercase">Hotel Saint Martin </small>
-                                <div class="mb-3">
-                                    3 <small class="fa fa-star text-primary"></small>
-
-                                    <!--Para ver el nro solo:
-                                    Nro de Estrellas <small class="fa fa-star text-primary"></small>
-                                    -->
-
-                                    <!--
-                                    Para ver tantas estrellas: (se repite cuantas tenga)
-                                    Puedes generar otro ciclo repetitivo aqui para que repita cada estrella, tantas veces:
-                                    <small class="fa fa-star text-primary"></small>
-                                    <small class="fa fa-star text-primary"></small>
-                                    <small class="fa fa-star text-primary"></small>
-                                    -->
-
-                                </div>
-                                <p class="mb-4">Disfruta tu mejor estadia.</p>
-                            </div>
-                            <div class="row bg-primary rounded-bottom mx-0">
-                                <div class="col-6 text-start px-0">
-                                    <a href="#" class="btn-hover btn text-white py-2 px-4">Read More</a>
-                                </div>
-                                <div class="col-6 text-end px-0">
-                                    <a href="#" class="btn-hover btn text-white py-2 px-4">Book Now</a>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
+                    <!-- Cierre foreach php -->
+                    <?php endforeach; ?>
+                </div>
 
 
                     <!--
