@@ -1,67 +1,77 @@
 <?php
 
-/** ARRAY **/
-$Personas = array();
-$Personas[0]['Nombre'] = "Juan";
-$Personas[0]['Apellido'] = "Gonzalez";
-$Personas[0]['Antiguedad'] = 8; //en años
-$Personas[0]['Sueldo'] = 1400000;
-$Personas[0]['Horas_Extras'] = 5;
-$Personas[0]['Valor_Hora_Extra'] = 15000;
+    /** ARRAY **/
+    $Personas = array();
+    $Personas[0]['Nombre'] = "Juan";
+    $Personas[0]['Apellido'] = "Gonzalez";
+    $Personas[0]['Antiguedad'] = 8; //en años
+    $Personas[0]['Sueldo'] = 1400000;
+    $Personas[0]['Horas_Extras'] = 5;
+    $Personas[0]['Valor_Hora_Extra'] = 15000;
 
-$Personas[1]['Nombre'] = "Martin";
-$Personas[1]['Apellido'] = "Juarez";
-$Personas[1]['Antiguedad'] = 4; //en años
-$Personas[1]['Sueldo'] = 1300000;
-$Personas[1]['Horas_Extras'] = 8;
-$Personas[1]['Valor_Hora_Extra'] = 10000;
+    $Personas[1]['Nombre'] = "Martin";
+    $Personas[1]['Apellido'] = "Juarez";
+    $Personas[1]['Antiguedad'] = 4; //en años
+    $Personas[1]['Sueldo'] = 1300000;
+    $Personas[1]['Horas_Extras'] = 8;
+    $Personas[1]['Valor_Hora_Extra'] = 10000;
 
-$Personas[2]['Nombre'] = "Roberto";
-$Personas[2]['Apellido'] = "Perez";
-$Personas[2]['Antiguedad'] = 5; //en años
-$Personas[2]['Sueldo'] = 1250000;
-$Personas[2]['Horas_Extras'] = 4;
-$Personas[2]['Valor_Hora_Extra'] = 12000;
+    $Personas[2]['Nombre'] = "Roberto";
+    $Personas[2]['Apellido'] = "Perez";
+    $Personas[2]['Antiguedad'] = 5; //en años
+    $Personas[2]['Sueldo'] = 1250000;
+    $Personas[2]['Horas_Extras'] = 4;
+    $Personas[2]['Valor_Hora_Extra'] = 12000;
 
-$Personas[3]['Nombre'] = "Pablo";
-$Personas[3]['Apellido'] = "Perez";
-$Personas[3]['Antiguedad'] = 10; //en años
-$Personas[3]['Sueldo'] = 1500000;
-$Personas[3]['Horas_Extras'] = 2;
-$Personas[3]['Valor_Hora_Extra'] = 15000;
+    $Personas[3]['Nombre'] = "Pablo";
+    $Personas[3]['Apellido'] = "Perez";
+    $Personas[3]['Antiguedad'] = 10; //en años
+    $Personas[3]['Sueldo'] = 1500000;
+    $Personas[3]['Horas_Extras'] = 2;
+    $Personas[3]['Valor_Hora_Extra'] = 15000;
 
-$CantidadPersonas = count($Personas);
-/****************************************/
+    $CantidadPersonas = count($Personas);
+    /****************************************/
 
-/** FUNCIONES **/
-function CalcularVacaciones($Antiguedad)
-{
-    $Dias = 0;
-    if ($Antiguedad < 5) {
-        //menos de 5 años
-        $Dias = 14;
-    } elseif ($Antiguedad >= 5 && $Antiguedad < 10) {
-        //entre 5 y 9 años
-        $Dias = 21;
-    } else { // 10 años o mas
-        $Dias = 30;
+    /** FUNCIONES **/
+    function CalcularVacaciones($Antiguedad)
+    {
+        $Dias = 0;
+        if ($Antiguedad < 5) {
+            //menos de 5 años
+            $Dias = 14;
+        } elseif ($Antiguedad >= 5 && $Antiguedad < 10) {
+            //entre 5 y 9 años
+            $Dias = 21;
+        } else { // 10 años o mas
+            $Dias = 30;
+        }
+        //devuelve el valor entero
+        return $Dias;
     }
-    //devuelve el valor entero
-    return $Dias;
-}
 
-function Calcular_Monto_HsExtra($ValorHoraExtra, $CantidadHorasExtra)
-{
-    $Monto_HsExtra = $ValorHoraExtra * $CantidadHorasExtra;
-    return $Monto_HsExtra;
-}
+    function Calcular_Monto_HsExtra($ValorHoraExtra, $CantidadHorasExtra)
+    {
+        $Monto_HsExtra = $ValorHoraExtra * $CantidadHorasExtra;
+        return $Monto_HsExtra;
+    }
 
-function Calcular_SueldoFinal($Sueldo, $Monto_HsExtra)
-{
-    return $Sueldo + $Monto_HsExtra;
-}
+    function Calcular_SueldoFinal($Sueldo, $Monto_HsExtra, $CantidadHorasExtra)
+    {
+        $Sueldo_total = $Sueldo + $Monto_HsExtra;
+        $Porcentaje = ($CantidadHorasExtra >= 5) ? 10 : 5;
+        $Incentivo = $Sueldo_total * ($Porcentaje / 100);
 
+        return [
+            'SueldoFinal' => $Sueldo_total + $Incentivo,
+            'Incentivo' => $Incentivo,
+            'Porcentaje' => $Porcentaje,
+            ];
+    }
 
+    function Formatear_Valores($Valor_Numerico) {
+        return number_format($Valor_Numerico, 0, ",", ".");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -139,17 +149,18 @@ function Calcular_SueldoFinal($Sueldo, $Monto_HsExtra)
                                 <th title="dato">Apellido</th>
                                 <th title="dato">Nombre</th>
                                 <th title="dato">Antigüedad </th>
-                                <th title="dato calculado" style='color: #009688'></i><strong>Vacaciones</strong></th>
+                                <th title="dato calculado" style='color: #009688'>Vacaciones</th>
                                 <th title="dato">Sueldo</th>
                                 <th title="dato">Hs Extra y Valor</th>
-                                <th title="dato calculado" style='color: #009688'><strong>Monto a cobrar por Hs Extra</strong></th>
-                                <th title="dato calculado" style='color: #009688'><strong>Sueldo Final</strong></th>
+                                <th title="dato calculado" style='color: #009688'>Monto a cobrar por Hs Extra</th>
+                                <th title="dato calculado" style='color: #009688'>Incentivo (%)</th>
+                                <th title="dato calculado" style='color: #009688'>Sueldo Final</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php for ($i = 0; $i < $CantidadPersonas; $i++) { ?>
                                 <tr>
-                                    <td><?php echo ($i + 1); //indica el nro de renglón  
+                                    <td><?php echo ($i + 1); //indica el nro de renglón
                                         ?></td>
                                     <td><?php echo $Personas[$i]['Apellido']; ?></td>
                                     <td><?php echo $Personas[$i]['Nombre']; ?></td>
@@ -158,17 +169,27 @@ function Calcular_SueldoFinal($Sueldo, $Monto_HsExtra)
                                         <?php $DiasVacaciones = CalcularVacaciones($Personas[$i]['Antiguedad']); ?>
                                         Corresponden <strong><?php echo $DiasVacaciones; ?></strong> dias.
                                     </td>
-                                    <td>$ <?php echo $Personas[$i]['Sueldo']; ?> </td>
-                                    <td><?php echo $Personas[$i]['Horas_Extras']; ?> hs. <br />[c/u $ <?php echo $Personas[$i]['Valor_Hora_Extra']; ?> ]</td>
+                                    <td>$ <?php echo Formatear_Valores($Personas[$i]['Sueldo']); ?> </td>
+                                    <td><?php echo $Personas[$i]['Horas_Extras']; ?> hs. <br />[c/u $ <?php echo Formatear_Valores($Personas[$i]['Valor_Hora_Extra']); ?> ]</td>
                                     <td>
                                         <strong>
                                             <?php $Monto_Cobrar_HsExtra = Calcular_Monto_HsExtra($Personas[$i]['Valor_Hora_Extra'], $Personas[$i]['Horas_Extras']); ?>
-                                            $ <?php echo $Monto_Cobrar_HsExtra; ?>
+                                            $ <?php echo Formatear_Valores($Monto_Cobrar_HsExtra); ?>
                                         </strong>
                                     </td>
                                     <td>
                                         <strong>
-                                            $ <?php echo Calcular_SueldoFinal($Personas[$i]['Sueldo'], $Monto_Cobrar_HsExtra); ?>
+                                            $ <?php
+                                            $Resultados[$i] = Calcular_SueldoFinal($Personas[$i]['Sueldo'], $Monto_Cobrar_HsExtra, $Personas[$i]['Horas_Extras']);
+                                            echo Formatear_Valores($Resultados[$i]['Incentivo']); ?>
+                                            (<?= $Resultados[$i]['Porcentaje']; ?>%)
+                                        </strong>
+                                    </td>
+                                    <td>
+                                        <strong>
+                                            $ <?php
+                                            $Resultados[$i] = Calcular_SueldoFinal($Personas[$i]['Sueldo'], $Monto_Cobrar_HsExtra, $Personas[$i]['Horas_Extras']);
+                                            echo Formatear_Valores($Resultados[$i]['SueldoFinal']); ?>
                                         </strong>
                                     </td>
                                 </tr>
