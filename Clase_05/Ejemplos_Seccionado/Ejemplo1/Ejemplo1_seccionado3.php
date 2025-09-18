@@ -90,7 +90,7 @@ include 'funciones.php';  //aqui se incrusta toooodo el contenido de este otro s
                         <tbody>
                             <?php for ($i = 0; $i < $CantidadPersonas; $i++) { ?>
                                 <tr>
-                                    <td><?php echo ($i + 1); //indica el nro de renglón  
+                                    <td><?php echo ($i + 1); //indica el nro de renglón
                                         ?></td>
                                     <td><?php echo $Personas[$i]['Apellido']; ?></td>
                                     <td><?php echo $Personas[$i]['Nombre']; ?></td>

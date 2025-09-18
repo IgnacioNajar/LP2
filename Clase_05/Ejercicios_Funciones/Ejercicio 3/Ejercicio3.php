@@ -1,5 +1,4 @@
 <?php
-
     $fecha_nacimiento = '23/10/1997 14:45:00';
 
     list($fecha, $hora) = explode(" ", $fecha_nacimiento);

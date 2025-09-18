@@ -21,9 +21,6 @@
         'fecha_nacimiento' => '07/02/2002'
         ]
     ];
-
-
-
 ?>
 
 <!DOCTYPE html>

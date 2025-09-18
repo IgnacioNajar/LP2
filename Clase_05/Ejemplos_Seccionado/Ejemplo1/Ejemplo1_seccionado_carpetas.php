@@ -1,4 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 require_once 'datos/array.php'; //aqui se incrusta toooodo el contenido de este script
 
 require 'funciones/funciones.php';  //aqui se incrusta toooodo el contenido de este otro script
@@ -90,7 +94,7 @@ require 'funciones/funciones.php';  //aqui se incrusta toooodo el contenido de e
                         <tbody>
                             <?php for ($i = 0; $i < $CantidadPersonas; $i++) { ?>
                                 <tr>
-                                    <td><?php echo ($i + 1); //indica el nro de renglón  
+                                    <td><?php echo ($i + 1); //indica el nro de renglón
                                         ?></td>
                                     <td><?php echo $Personas[$i]['Apellido']; ?></td>
                                     <td><?php echo $Personas[$i]['Nombre']; ?></td>
