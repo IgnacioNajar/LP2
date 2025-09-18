@@ -12,7 +12,7 @@
             <h5>muestra el contenido de un array</h5>
             <a href="http://php.net/manual/es/function.print-r.php">Ver print_r </a><br />
             <?php
-            //dado un array simple 
+            //dado un array simple
             $Colores = array('negro', 'blanco', 'rojo', 'verde', 'azul');
             //muestro su contenido simplemente:
             print_r($Colores);
@@ -50,7 +50,7 @@
             <?php
             /* union de elementos de un array */
             //$Colores_Unidos_Por_Coma = implode(",", $Colores);
-            $Colores_Unidos_Por_Coma = join(",", $Colores);
+            $Colores_Unidos_Por_Coma = join(" - ", $Colores);
             echo $Colores_Unidos_Por_Coma;
             ?>
             <hr />

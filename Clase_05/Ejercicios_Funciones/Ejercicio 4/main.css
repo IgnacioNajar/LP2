@@ -1,0 +1,117 @@
+/* ---- RESET BÁSICO ---- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ---- ESTILOS GENERALES ---- */
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #f5f6fa;
+    color: #333;
+    padding: 2rem;
+    line-height: 1.5;
+}
+
+/* ---- ENCABEZADO ---- */
+.main-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.main-header h1 {
+    font-size: 2rem;
+    color: #2c3e50;
+    border-bottom: 3px solid #3498db;
+    display: inline-block;
+    padding-bottom: 0.5rem;
+}
+
+/* ---- SECCIÓN DEL EJERCICIO ---- */
+.ejercicio h2 {
+    font-size: 1.4rem;
+    color: #34495e;
+    margin-bottom: 1rem;
+    border-left: 4px solid #3498db;
+    padding-left: 0.5rem;
+}
+
+.descripcion ul {
+    margin-bottom: 2rem;
+    padding-left: 1.5rem;
+}
+
+.descripcion li {
+    margin-bottom: 0.5rem;
+}
+
+/* ---- TABLA ---- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+thead {
+    background: #3498db;
+    color: #fff;
+}
+
+thead th {
+    text-align: left;
+    padding: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+tbody tr {
+    border-bottom: 1px solid #e0e0e0;
+    transition: background 0.2s ease;
+}
+
+tbody tr:hover {
+    background: #ecf6ff;
+}
+
+tbody td {
+    padding: 0.75rem;
+}
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 600px) {
+    body {
+        padding: 1rem;
+    }
+
+    table, thead, tbody, th, td, tr {
+        display: block;
+        width: 100%;
+    }
+
+    thead {
+        display: none; /* Oculta encabezado en móviles */
+    }
+
+    tbody tr {
+        margin-bottom: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        padding: 0.5rem;
+    }
+
+    tbody td {
+        padding: 0.5rem;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    tbody td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: #555;
+    }
+}

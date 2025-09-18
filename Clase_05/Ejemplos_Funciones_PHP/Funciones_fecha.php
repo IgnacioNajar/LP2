@@ -7,7 +7,7 @@
     <body>
         <div>
             <h2>Funciones de Fechas con PHP:</h2>
-            
+
 
             <h3>Fecha Actual</h3>
             <h5>toma parametros en cada caso para devolver lo que necesitamos. Revisar la siguiente documentacion</h5>
@@ -17,12 +17,13 @@
             <br />
             <br />
             <?php
+            date_default_timezone_set('America/Argentina/Buenos_Aires');
             //fecha actual del servidor
             $Hoy = date('d/m/Y H:i:s');
             echo "La fecha y hora actual del servidor es: " . $Hoy;
             echo '<br />';
-            $Hoy = date('m-d-Y H:i:s');
-            echo "La fecha y hora actual del servidor es: " . $Hoy . ' [noten otro formato con la misma informacion]';
+            $Hoy = date('m-d-Y h:i:s a');
+            echo "La fecha y hora actual del servidor es: " . $Hoy . ' [noten otro formato con la misma informacion]' . '<hr />';
 
             $DiaHoy = date("d");
             echo 'Numero de dia de hoy: ' . $DiaHoy . '<hr />';
@@ -44,11 +45,7 @@
 
             $AnioHoy_4dig = date("Y");
             echo 'A&ntilde;o de hoy 4 dig: ' . $AnioHoy_4dig . '<hr />';
-
-            $TextoMesHoy = date("M");
-            echo 'Texto mes de hoy en ingles: ' . $TextoMesHoy . '<hr />';
             ?>
-
 
             <h3>checkdate() - Checkeo de fecha correcta</h3>
             <h5>toma 3 parametros en este orden: MES, Dia, Año: nos dice si la fecha ingresada es correcta o no</h5>
@@ -67,7 +64,7 @@
             <h3>Funciones de Hora</h3>
 
             <?php
-            $HoraActual = date('h'); //Formato de 12 horas de una hora con ceros iniciales
+            $HoraActual = date('h a'); //Formato de 12 horas de una hora con ceros iniciales
             echo '$HoraActual: ' . $HoraActual . '<hr />';
 
             $HoraActual = date('H'); //Formato de 24 horas de una hora con ceros iniciales
@@ -98,7 +95,7 @@
             $Mes = 5;
             $Anio = 2012;
 
-            $timestamp = mktime($Hora, $Minuto, $Segundo, $Mes, $Dia, $Anio); //genera un numero entero 
+            $timestamp = mktime($Hora, $Minuto, $Segundo, $Mes, $Dia, $Anio); //genera un numero entero
             echo '$timestamp: ' . $timestamp . '<br />';
 
             $Fecha_Formateada_1 = date('d/m/Y H:i:s', $timestamp);
@@ -109,6 +106,8 @@
 
             $Fecha_Formateada_3 = date('w', $timestamp);
             echo '$Fecha_Formateada_3: ' . $Fecha_Formateada_3 . '<br />';
+            //Muestra el dia exacto de la semana
+            echo date('l', mktime(0, 0, 0, 5, 23, 2012));
             ?>
 
             <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />

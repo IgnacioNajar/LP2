@@ -37,7 +37,7 @@
             if (empty($Var)) {
                 echo 'La variable $Var esta vacia. <br />';
             } else {
-                echo 'este array contiene elementos: ';
+                echo 'Este array contiene elementos: ';
                 print_r($Var);
             }
             ?>
@@ -59,7 +59,7 @@
             <h3>rand() - toma dos numeros como parametros  </h3>
             <h5>devuelve un numero aleatorio entre dos numeros dados</h5>
             <?php
-            echo "mostrar valores aleatorios entre dos numeros especificados: 5 y 20 incluidos: "; 
+            echo "mostrar valores aleatorios entre dos numeros especificados: 5 y 20 incluidos: ";
             echo rand(5, 20);
             ?>
 
