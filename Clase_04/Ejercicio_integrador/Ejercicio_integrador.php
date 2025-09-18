@@ -310,8 +310,8 @@
                             </div>
 
                         </div>
-                    <!-- Cierre foreach php -->
                     <?php endforeach; ?>
+                    <!-- Cierre foreach php -->
                 </div>
 
 
