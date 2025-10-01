@@ -9,13 +9,13 @@ include_once('mis_datos.php');
         <div class="user">
 
             <div class="photo">
-                <img src="<?= $user_photo; ?>" alt="user-img">
+                <img src="<?= $userPhoto; ?>" alt="user-img">
             </div>
 
             <div class="info">
                 <a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
                     <span>
-                        <?= $user_name; ?>
+                        <?= $userName; ?>
                         <span class="user-level">Admin</span>
                         <span class="caret"></span>
                     </span>
@@ -52,14 +52,14 @@ include_once('mis_datos.php');
 
         <ul class="nav">
 
-            <li class="nav-item <?= ($pagina_actual == 'inicio') ? 'active' : ''; ?>">
+            <li class="nav-item <?= ($paginaActual == 'inicio') ? 'active' : ''; ?>">
                 <a href="index.php">
                     <i class="la la-dashboard"></i>
                     <p>Inicio</p>
                 </a>
             </li>
 
-            <li class="nav-item <?= ($pagina_actual == 'listado') ? 'active' : ''; ?>">
+            <li class="nav-item <?= ($paginaActual == 'listado') ? 'active' : ''; ?>">
                 <a href="listado.php">
                     <i class="la la-th"></i>
                     <p>Listado de viajes</p>
