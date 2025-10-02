@@ -56,7 +56,6 @@ function calcularCostoViaje($viaje) {
     return calcularCostoTotalViaje($viaje['precioBase'], $costoPeaje);
 }
 
-
 // Devuelve el listado de viajes formateados
 function formatearViajes($listadoViajes) {
     $viajesFormateados = [];
@@ -126,5 +125,4 @@ function calcularSumatoriaCostoTotalViaje($listadoViajes) {
 
     return $suma;
 }
-
 ?>
