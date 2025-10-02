@@ -20,6 +20,7 @@ function obtenerEstiloSegunEstado($estado) {
         'En camino' => WARNING_COLOR,
         'No iniciado' => DANGER_COLOR
     ];
+    
     return $estilos[$estado];
 }
 
@@ -37,6 +38,7 @@ function calcularPorcentajeBarra($peso) {
 function obtenerEstiloSegunPeso($peso) {
     if ($peso >= 1.5) return DANGER_COLOR;
     if ($peso >= 1) return WARNING_COLOR;
+
     return SUCCESS_COLOR;
 }
 
@@ -53,6 +55,7 @@ function calcularCostoTotalViaje($precioBase, $costoPeaje) {
 // Devuelve el costo total del viaje para no tener que calcularlo en cada funcion
 function calcularCostoViaje($viaje) {
     $costoPeaje = calcularCostoPeajeTotal($viaje['cantidadPeajes']);
+
     return calcularCostoTotalViaje($viaje['precioBase'], $costoPeaje);
 }
 
