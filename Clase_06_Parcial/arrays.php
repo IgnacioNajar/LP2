@@ -1,4 +1,4 @@
-    <?php
+<?php
 // Datos de los choferes
 $nombreChoferes = [
     ['nombre' => 'Pedro', 'apellido' => 'Martínez'],
