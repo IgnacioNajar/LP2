@@ -1,48 +1,49 @@
 <?php
-//este sera el listado de registros traidos de la base de datos
-$Listado = array();
+// Array donde guardaremos los registros
+$Listado = [];
 
-//datos de conexion
+// Datos de conexión
 $Host = 'localhost';
 $User = 'root';
 $Password = '';
 $BaseDeDatos = 'panel';
 
-//procedo al intento de conexion con esos parametros
-$linkConexion = mysqli_connect($Host, $User, $Password, $BaseDeDatos);
+try {
+    // Activar que mysqli lance excepciones
+    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
-if ($linkConexion != false) {
-    //quiero traer un listado de los NIVELES cargados
-    //1) genero la consulta que deseo: ordenada por ese campo
-    $SQL = "SELECT * FROM paises  ORDER BY 1";
-    
-    //2) a la conexion actual le brindo mi consulta, y el resultado lo entrego a variable $rs
+    // Intento de conexión
+    $linkConexion = mysqli_connect($Host, $User, $Password, $BaseDeDatos);
+    echo '<h3>Conexión correcta a la base de datos</h3>';
+
+    // Consulta de países
+    $SQL = "SELECT * FROM pais ORDER BY id"; // mejor usar columna explícita en lugar de ORDER BY 1
     $rs = mysqli_query($linkConexion, $SQL);
-    
-    //3) el resultado deberá organizarse en una matriz, entonces lo recorro
-    //mientras haya resultados, voy tomando cada dato del resultado en el array $data
-    //cada elemento se corresponde a un campo de mi consulta
-    //estructuro mi propio array $Listado 
-    $i=0;
-    while ($data = mysqli_fetch_array($rs)) {
-        $Listado[$i]['ID'] = $data['Id'];
-        $Listado[$i]['NOMBRE'] = $data['Denominacion'];
-        $i++;
-    }
-}
 
-//si $Listado contiene valores, ya dispongo de los datos. 
-//Organizo para agregar un link que va a eliminar cada registro
-if (!empty($Listado)) {
-    echo '<h3>Listado de Paises</h3>';
-    $cantidadRegistros = count($Listado);
-    for ($i = 0; $i < $cantidadRegistros; $i++) {  ?>
-        ID: <?php  echo "{$Listado[$i]['ID']}"; ?>  |  
-        NOMBRE:  <?php  echo "{$Listado[$i]['NOMBRE']}"; ?>  | 
-        <a href='listado_paises_link.php?codigo=<?php echo $Listado[$i]['ID'] ?>' >Eliminar </a> 
-        <br />
-    <?php
+    // Recorrer resultados con while y agregar al listado
+    while ($fila = mysqli_fetch_assoc($rs)) {
+        $Listado[] = $fila; // cada fila es un array asociativo
     }
-}else echo 'el array esta vacio';
+
+    // Mostrar listado con link de eliminación
+    if (!empty($Listado)) {
+        echo '<h3>Listado de Países</h3>';
+        foreach ($Listado as $indice => $fila): ?>
+            <p>
+                El elemento <?= $indice; ?> de mi listado contiene: <br />
+                El ID &#10132; <?= $fila['id']; ?> <br />
+                Nombre &#10132; <?= $fila['nombre']; ?> <br />
+                <a href='listado_paises_link.php?codigo=<?= $fila['id']; ?>'>
+                    Eliminar
+                </a>
+            </p>
+            <hr />
+        <?php endforeach;
+    } else {
+        echo 'No hay países cargados en la base de datos.';
+    }
+} catch (mysqli_sql_exception $e) {
+    echo '<h3>Error en la base de datos</h3>';
+    echo '<p>' . $e->getMessage() . '</p>';
+}
 ?>
-<br />

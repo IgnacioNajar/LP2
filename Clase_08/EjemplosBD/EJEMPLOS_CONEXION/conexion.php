@@ -1,15 +1,18 @@
 <?php
-//para el mysql instalado con Wamp, estos son los datos de conexio
-$Host = 'localhost';  //127.0.0.1
+$Host = 'localhost';
 $User = 'root';
 $Password = '';
-$BaseDeDatos='panel';  
+$BaseDeDatos='panel';
 
-//procedo al intento de conexion con esos parametros
-$linkConexion = mysqli_connect($Host, $User, $Password, $BaseDeDatos);
-if ($linkConexion!=false) {
-    echo '<h3>Acceso al Mysql del Localhost: La conexion es correcta!</h3>';
-}else {
-    echo '<h3>Hubo algun error al intentar conectarse...</h3>';
+try {
+    $linkConexion = mysqli_connect($Host, $User, $Password, $BaseDeDatos);
+
+    echo '<h3>Acceso al MySQL del localhost: La conexión es correcta!</h3>';
+
+} catch (mysqli_sql_exception $e) {
+    // Aquí va tu "else"
+    echo '<h3>Hubo algún error al intentar conectarse...</h3>';
+    // Opcionalmente mostrar el error real para debug:
+    echo '<p>Error: ' . $e->getMessage() . '</p>';
 }
 ?>

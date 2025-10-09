@@ -1,42 +1,31 @@
 <?php
-//Datos de conexion a la BD
-$Host = 'localhost';
-$User = 'root';
-$Password = '';
-$BaseDeDatos = 'panel';
+$host = 'localhost';
+$user = 'root';
+$password = '';
+$database = 'panel';
 
-//procedo al intento de conexion con esos parametros
-$linkConexion = mysqli_connect($Host, $User, $Password, $BaseDeDatos);
+try {
+    $conexionBd = mysqli_connect($host, $user, $password, $database);
+    echo '<h3>Acceso al MySQL del localhost: La conexion es correcta!</h3>';
 
-if ($linkConexion != false) {
-    //si la conexion es correcta... 
-    echo '<h2>Acceso al Mysql del Localhost... ok</h3>';
-    
-    /*********************************/
-    //en la variable $SQL_Insert asigno la CONSULTA de INSERCION con el valor a agregar:
-    $SQL_Insert="INSERT INTO paises (Denominacion) VALUES ('Uruguay')";
-    
-    //procedo a ejecutar la consulta con la conexion generada al principio
-    if (!mysqli_query($linkConexion, $SQL_Insert)) {
-        //si surge un error, finalizo la ejecucion del script con un mensaje
-        die('<h4>Error al intentar insertar el registro de Pais: Uruguay.</h4>');
+    $paises = ['Alemania', 'Angola', 'Afghanistan'];
+
+    try {
+
+        foreach ($paises as $indice => $pais) {
+            $sqlInsert = "INSERT INTO pais(nombre) VALUES ('$pais')";
+            mysqli_query($conexionBd, $sqlInsert);
+            echo "<h3>✔ País: $pais insertado correctamente.</h3>";
+        }
+
+    } catch (mysqli_sql_exception $e) {
+        echo '<h3>Error al insertar</h3>';
+        echo '<p>'. $e->getMessage() .'</p>';
     }
-    //si todo va bien muestro mensaje
-    echo '<h4>Uruguay: Registro insertado correctamente.</h4>';
 
-    /**********************************/
-    //en la variable $SQL_Insert asigno la CONSULTA de INSERCION con el valor a agregar:
-    $SQL_Insert="INSERT INTO paises (Denominacion) VALUES ('EEUU')";
-    
-    //procedo a ejecutar la consulta con la conexion generada al principio
-    if (!mysqli_query($linkConexion, $SQL_Insert)) {
-        //si surge un error, finalizo la ejecucion del script con un mensaje
-        die('<h4>Error al intentar insertar el registro de Pais: EEUU.</h4>');
-    }
-    //si todo va bien muestro mensaje
-    echo '<h4>EEUU: Registro insertado correctamente.</h4>';
+} catch (mysqli_sql_exception $e) {
+    echo '<h3>Error de conexión</h3>';
+    echo '<p>'. $e->getMessage() . '</p>';
+    exit;
 }
-
-
-
 ?>
