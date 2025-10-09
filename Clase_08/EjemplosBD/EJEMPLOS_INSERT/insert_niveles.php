@@ -4,6 +4,9 @@ $user = 'root';
 $password = '';
 $database = 'panel';
 
+// Activar que mysqli lance excepciones
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
 try {
     $conexionBd = mysqli_connect($host, $user, $password, $database);
     echo '<h3>Acceso al MySQL del localhost: La conexion es correcta!</h3>';

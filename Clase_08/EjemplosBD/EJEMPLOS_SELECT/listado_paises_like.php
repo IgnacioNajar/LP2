@@ -7,9 +7,10 @@ $User = 'root';
 $Password = '';
 $BaseDeDatos = 'panel';
 
+// Activar que mysqli lance excepciones
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
 try {
-    // Activar que mysqli lance excepciones
-    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
     // Intento de conexión
     $linkConexion = mysqli_connect($Host, $User, $Password, $BaseDeDatos);
