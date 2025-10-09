@@ -1,8 +1,8 @@
 <?php
 $Mensaje = '';
 
-if (!empty($_POST['Ingresar'])) {
-    //esto va a ejecutar cuando el boton llegue con valor, es decir se haya pulsado    
+if (isset($_POST['Ingresar'])) {
+    //esto va a ejecutar cuando el boton llegue con valor, es decir se haya pulsado
     //validacion de la caja de texto del Login
     if (strlen($_POST['Login']) < 3) {
         //su longitud es menor a 3 caracteres
@@ -20,17 +20,17 @@ if (!empty($_POST['Ingresar'])) {
         //variables a utilizar
         $FechaHoy = date('Ymd'); //para nombrar el archivo
         $FechaHoraHoy = date('Y-m-d H:i:s'); //para contenido del archivo
-        
-        //mensaje a escribir en el archivo: 
+
+        //mensaje a escribir en el archivo:
         $TextoLog = "$FechaHoraHoy : access {$_POST['Login']}  \n";
-        
+
         //genero el archivo
-        $ArchivoLog = fopen("logs/access_$FechaHoy.log", 'a+');  
+        $ArchivoLog = fopen("logs/access_$FechaHoy.log", 'a+');
         //lo escribo con el texto
         fwrite($ArchivoLog, $TextoLog);
         //cierro el archivo
         fclose($ArchivoLog);
-        $Mensaje = "<strong>Se ha guardado el log de acceso, en la carpeta 'logs'.</strong> 
+        $Mensaje = "<strong>Se ha guardado el log de acceso, en la carpeta 'logs'.</strong>
         Puedes verlo <a href='logs/access_$FechaHoy.log' target='_blank'>aqui</a> ";
     }
 }
@@ -45,11 +45,11 @@ require_once 'header.inc.php';
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <?php require_once 'superior.inc.php'; ?>
-            
+
             <div class="navbar-default sidebar" role="navigation">
                 <?php require_once 'menu.inc.php'; ?>
             </div>
-            
+
         </nav>
         <div id="page-wrapper">
             <div class="row">
@@ -81,7 +81,7 @@ require_once 'header.inc.php';
                                         <?php } ?>
                                         <div class="form-group">
                                             <label>Ingresa tu login</label>
-                                            <input class="form-control" type="text" name="Login" 
+                                            <input class="form-control" type="text" name="Login"
                                                    value="<?php if (!empty($_POST['Login'])) {
                                                                     echo $_POST['Login'] ; //tiene algun valor
                                                                 } else {
@@ -93,7 +93,7 @@ require_once 'header.inc.php';
                                             <label>Ingresa tu clave</label>
                                             <input class="form-control" type="password" name="Clave"  />
                                         </div>
-                                        <button type="submit" name="Ingresar" value="Ingresar"  class="btn btn-default">Ingresa</button>                                   
+                                        <button type="submit" name="Ingresar" value="Ingresar"  class="btn btn-default">Ingresa</button>
                                     </div>
                                     <!-- /.col-lg-6 (nested) -->
                                 </div>
