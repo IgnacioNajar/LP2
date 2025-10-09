@@ -1,10 +1,10 @@
-<?php require_once 'header.inc.php'; ?>           
+<?php require_once 'header.inc.php'; ?>
 
 </head>
 
 <body>
 
-    <div id="wrapper">   
+    <div id="wrapper">
 
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -61,37 +61,36 @@
                             Ejemplo Formulario de Login
                         </div>
                         <div class="panel-body">
-                            
-                            <form role="form" >
+
+                            <form role="form" method="post">
                                 <div class="row">
                                     <div class="col-lg-4" style="text-align: left;">
                                         <img src="dist/img/login.png" />
                                     </div>
                                     <div class="col-lg-6">
                                         <!-- seccion central  -->
-                                        
+
                                         <div class="form-group">
                                             <label>Ingresa tu login</label>
-                                            <input class="form-control" />
+                                            <input class="form-control" id="login" name="Login" type="email" value="" required>
                                         </div>
 
                                         <div class="form-group">
                                             <label>Ingresa tu clave</label>
-                                            <input class="form-control" />
+                                            <input class="form-control" id="password" name="Password" type="password" value="" required>
                                         </div>
 
-                                        <button  class="btn btn-default">Ingresa</button>
-
+                                        <button class="btn btn-default" type="submit" id="ingresar" name="BotonIngresar" value="Ingresar">Ingresa</button>
                                     </div>
-                                    
+
                                     <!-- /.col-lg-6 (nested) -->
                                 </div>
 
 
                             </form>
-                                                                   
- <?php print_r($_POST); ?>
-
+                            <pre>
+                                <?php print_r($_POST); ?>
+                            </pre>
                             <hr />
                             Para registrarte <a href="Ejemplo1.php">ingresa aqui</a>
                             <!-- /.row (nested) -->

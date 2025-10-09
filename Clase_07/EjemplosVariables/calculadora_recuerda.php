@@ -40,11 +40,11 @@ require_once 'header.inc.php';
                             <?php
                             //pregunto si el boton viene pulsado
                             if (!empty($_POST['Operar'])) {
-                                
+
                                 //primero voy a validar que sean numeros enviados
                                 //la funcion devolvera el mensaje a mostrar en caso de haber error
                                 $MensajeError = ValidarControles();
-                                
+
                                 if (!empty($MensajeError)) {
                                     //si contiene valor el mensaje, es porque hubo errores
                                     //debo mostrar la seccion de error  y no calcular ?>
@@ -52,9 +52,9 @@ require_once 'header.inc.php';
                                         <strong>Atención:</strong> <br />
                                         <?php echo $MensajeError; ?>
                                     </div>
-                                    
-                                        <?php 
-                                
+
+                                        <?php
+
                                 } else {
                                     //si el mensaje esta vacio es porque esta todo ok
                                     //voy a calcular y mostrar la seccion del resultado
@@ -64,9 +64,9 @@ require_once 'header.inc.php';
                                         El resultado es <strong><?php echo $CalculoRealizado; ?></strong>
                                     </div>
                                     <?php
-                                } 
+                                }
                              } //fin pregunta del boton si viene pulsado
-                                ?>                          
+                                ?>
 
 
                                 <form role="form" method="post" >
@@ -75,49 +75,49 @@ require_once 'header.inc.php';
                                             <!-- seccion central izquierda -->
                                             <div class="form-group">
                                                 <label>Ingresa el primer número</label>
-                                                <input  class="form-control" 
-                                                        type="text" 
-                                                        name="Numero1" 
-                                                        value="<?php if (!empty($_POST['Numero1'])){echo $_POST['Numero1'];} ?>" >                                           
+                                                <input  class="form-control"
+                                                        type="text"
+                                                        name="Numero1"
+                                                        value="<?php if (!empty($_POST['Numero1'])){echo $_POST['Numero1'];} ?>" >
                                             </div>
-                                            
+
                                             <div class="form-group">
                                                 <label>Ingresa el 2do número</label>
-                                                <input  class="form-control" 
-                                                        type="text" 
-                                                        name="Numero2" 
-                                                       value="<?php if (!empty($_POST['Numero1'])){echo $_POST['Numero1'];} ?>" >
+                                                <input  class="form-control"
+                                                        type="text"
+                                                        name="Numero2"
+                                                        value="<?php if (!empty($_POST['Numero2'])){echo $_POST['Numero2'];} ?>" >
                                             </div>
-                                            
+
                                             <div class="form-group">
                                                 <label>Elige la operación</label>
                                                 <select class="form-control" name="Operacion">
                                                     <option value="">Elige la operacion</option>
                                                     <option value="1"
-                                                            <?php 
+                                                            <?php
                                                             if (!empty($_POST['Operacion']) && $_POST['Operacion']==1) {
-                                                                echo 'selected'; 
+                                                                echo 'selected';
                                                             } ?>
                                                             >Deseo sumar ambos nros</option>
-                                                    
+
                                                     <option value="2"
-                                                            <?php 
+                                                            <?php
                                                             if (!empty($_POST['Operacion']) && $_POST['Operacion']==2) {
-                                                                echo 'selected'; 
+                                                                echo 'selected';
                                                             } ?>
                                                             >Deseo restar ambos nros</option>
-                                                    
+
                                                     <option value="3"
-                                                            <?php 
+                                                            <?php
                                                             if (!empty($_POST['Operacion']) && $_POST['Operacion']==3) {
-                                                                echo 'selected'; 
+                                                                echo 'selected';
                                                             } ?>
                                                             >Deseo multiplicar ambos nros</option>
-                                                    
-                                                    <option value="4" 
-                                                            <?php 
+
+                                                    <option value="4"
+                                                            <?php
                                                             if (!empty($_POST['Operacion']) && $_POST['Operacion']==4) {
-                                                                echo 'selected'; 
+                                                                echo 'selected';
                                                             } ?>
                                                             >Deseo dividir ambos nros</option>
                                                 </select>
@@ -146,8 +146,3 @@ require_once 'header.inc.php';
         <!-- /#wrapper -->
 
         <?php require_once 'footer.inc.php'; ?>
-
-
-
-
-        

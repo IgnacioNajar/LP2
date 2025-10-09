@@ -1,4 +1,4 @@
-<?php require_once 'header.inc.php'; ?>                 
+<?php require_once 'header.inc.php'; ?>
 
 </head>
 
@@ -61,6 +61,7 @@
                             Elementos básicos de un formulario
                         </div>
                         <div class="panel-body">
+                            <!-- Formulario -->
                             <form role="form" action="index.php">
 
                                 <div class="row">
@@ -90,7 +91,7 @@
                                             </select>
                                         </div>
 
-                                        
+
                                         <div class="form-group">
                                             <label>Textarea</label>
                                             <textarea class="form-control" rows="3"></textarea>

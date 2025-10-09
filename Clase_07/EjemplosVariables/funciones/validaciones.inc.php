@@ -1,9 +1,8 @@
-<?php 
+<?php
 function ValidarControles(){
-    //esta funcion retorna un mensaje, 
+    //esta funcion retorna un mensaje,
     //que puede estar vacio si todo se cumple
     //o puede contener las indicaciones para que se ingresen los datos correctamente
-
 
     //recuerden el signo ! indica negacion
 
@@ -16,7 +15,7 @@ function ValidarControles(){
         $Mensaje.="Debe ingresar el primer valor. <br />";
 
     }else {
-        //sino, si tiene valor , pero NO es un numero... 
+        //sino, si tiene valor , pero NO es un numero...
         if (!is_numeric($_POST['Numero1'])) {
             $Mensaje.="El primer valor debe ser un número. <br />";
         }
@@ -27,26 +26,21 @@ function ValidarControles(){
         //si la longitud de caracteres del control Numero2 es 0...
         //es decir esta vacio de contenido
         $Mensaje.="Debe ingresar el segundo valor. <br />";
-    }else {
-        //sino, si tiene valor pero no es un numero... 
-        if (!is_numeric($_POST['Numero2'])) {
+    }else if (!is_numeric($_POST['Numero2'])) {
+        //sino, si tiene valor pero no es un numero...
             $Mensaje.="El segundo valor debe ser un número. <br />";
+    } else {
+        if ($_POST['Numero2'] == 0 && $_POST['Operacion'] == 4) {
+            $Mensaje.="No se puede dividir por cero. <br />";
         }
     }
-    
+
     //validacion para saber que operacion desea hacer:
     if (empty($_POST['Operacion'])) {
         //si esta vacia la seleccion de la operacion
             $Mensaje.="Debe elegir la operación.<br />";
     }
-    
+
     return $Mensaje;
 }
-
-
-
-
-
-
-
 ?>

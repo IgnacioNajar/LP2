@@ -17,5 +17,9 @@
             <a href="Tarea3.php"><i class="fa fa-dashboard fa-fw"></i> Tarea 3</a>
         </li>
 
+        <li>
+            <a href="DestinoTarea3.php"><i class="fa fa-dashboard fa-fw"></i>Tarea 3 - Impresion de los valores del registro</a>
+        </li>
+
     </ul>
-</div>       
+</div>

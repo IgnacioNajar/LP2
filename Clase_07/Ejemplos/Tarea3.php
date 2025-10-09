@@ -61,7 +61,7 @@
                             Elementos básicos para una Registración:
                         </div>
                         <div class="panel-body">
-                            <form role="form" action="Ejemplo1.php" method="post">
+                            <form role="form" action="destino_tarea_3.php" method="post">
 
                                 <div class="row">
                                     <div class="col-lg-4" style="text-align: center;">
@@ -82,6 +82,16 @@
                                         <div class="form-group">
                                             <label>Email:</label>
                                             <input class="form-control" type="email" name="Email" id="email" value="">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Clave:</label>
+                                            <input class="form-control" type="password" name="Password" id="password" value="">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Reingrese la clave:</label>
+                                            <input class="form-control" type="password" name="PasswordReingresada" id="passwordreingresada" value="">
                                         </div>
 
                                         <div class="form-group">

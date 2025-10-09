@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-require_once 'funciones/funciones.inc.php'; 
+require_once 'funciones/funciones.inc.php';
 
 require_once 'header.inc.php'; ?>
 
@@ -34,9 +34,9 @@ require_once 'header.inc.php'; ?>
                         <div class="panel-heading">
                             Operamos con variables en una calculadora [GET]
                         </div>
-                        
+
                         <div class="panel-body">
-                            <?php 
+                            <?php
                             //pregunto si el boton viene pulsado
                             if (!empty($_GET['Operar'])) {
                                 //si viene pulsado, voy a calcular y mostrar la seccion del resultado
@@ -45,9 +45,9 @@ require_once 'header.inc.php'; ?>
                             <div class="alert alert-info">
                                 El resultado es <strong><?php echo $CalculoRealizado; ?></strong>
                             </div>
-                            <?php 
+                            <?php
                             } ?>
-                            
+
                             <form role="form" method="get" >
                                 <div class="row">
                                     <div class="col-lg-3">
@@ -77,7 +77,9 @@ require_once 'header.inc.php'; ?>
                                     </div>
                                 </div>
                             </form>
-                            <?php print_r($_GET); ?>
+                            <pre>
+                                <?php print_r($_GET); ?>
+                            </pre>
                             <!-- /.row (nested) -->
                         </div>
                         <!-- /.panel-body -->
@@ -94,4 +96,3 @@ require_once 'header.inc.php'; ?>
     <!-- /#wrapper -->
 
     <?php require_once 'footer.inc.php'; ?>
-    

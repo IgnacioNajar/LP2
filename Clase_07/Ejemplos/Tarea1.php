@@ -1,10 +1,10 @@
-<?php require_once 'header.inc.php'; ?>                 
+<?php require_once 'header.inc.php'; ?>
 
 </head>
 
 <body>
 
-    <div id="wrapper">   
+    <div id="wrapper">
 
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -68,7 +68,7 @@
                                         <img src="dist/img/register.png" />
                                         <br />
                                         <pre style="text-align: left;">
-                                            <?php 
+                                            <?php
                                             print_r($_POST); ?>
                                         </pre>
                                     </div>
@@ -76,21 +76,21 @@
                                         <!-- seccion central izquierda -->
                                         <div class="form-group">
                                             <label>Nombre:</label>
-                                            <input class="form-control" type="text" id="nombre" value="">
+                                            <input class="form-control" type="text" id="nombre" value="" name="Name">
                                         </div>
                                         <div class="form-group">
                                             <label>Apellido:</label>
-                                            <input class="form-control" type="text" id="apellido" value="">
+                                            <input class="form-control" type="text" id="apellido" value="" name="LastName">
                                         </div>
 
                                         <div class="form-group">
                                             <label>Email:</label>
-                                            <input class="form-control" type="email" id="email" value="">
+                                            <input class="form-control" type="email" id="email" value="" name="Email">
                                         </div>
 
                                         <div class="form-group">
                                             <label>Pais</label>
-                                            <select class="form-control" id="pais">
+                                            <select class="form-control" id="pais" name="Country">
                                                 <option value="">Selecciona...</option>
                                                 <option value="ARG">Argentina</option>
                                                 <option value="BRA">Brasil</option>
@@ -104,10 +104,10 @@
                                             <label>Género:</label>
                                             <br />
                                             <label class="radio-inline">
-                                                <input type="radio" id="GeneroF" value="F" >Femenino
+                                                <input type="radio" id="GeneroF" value="F"  name="Gender">Femenino
                                             </label>
                                             <label class="radio-inline">
-                                                <input type="radio" id="GeneroM" value="M">Masculino
+                                                <input type="radio" id="GeneroM" value="M" name="Gender">Masculino
                                             </label>
                                         </div>
                                         <div class="form-group">
@@ -115,12 +115,12 @@
                                             <br />
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" value="SI">Acepto los Términos y Condiciones.
+                                                    <input type="checkbox" value="SI" name="Conditions">Acepto los Términos y Condiciones.
                                                 </label>
                                             </div>
                                         </div>
 
-                                        <button type="submit" class="btn btn-default" value="Registrar" >Registrarme</button>
+                                        <button type="submit" class="btn btn-default" value="Registrar" name="Register" >Registrarme</button>
                                         o <a href="index.php">Volver al inicio</a>
                                     </div>
                                     <!-- /.row (nested) -->
