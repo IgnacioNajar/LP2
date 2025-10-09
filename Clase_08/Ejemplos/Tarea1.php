@@ -37,18 +37,27 @@ if (isset($_POST['BotonRegistrar'])) {
         }
 
         $csvFile = 'logs/registro_accesos.csv';
-        $archivoLog = fopen($csvFile, 'a+');
+        $dateTime = date('d/m/Y H:i:s');
+        $textoLog = "$dateTime | $apellido | $nombre | $email\n";
 
-        if (filesize($csvFile) === 0) {
+        //Enfoque mas simple para un csv basico
+        if (!file_exists($csvFile)) {
+            $header = "Fecha y hora actual | Valor del apellido | Valor del nombre | Email\n";
+            file_put_contents($csvFile, $header);
+        }
+
+        file_put_contents($csvFile, $textoLog, FILE_APPEND);
+
+        //$archivoLog = fopen($csvFile, 'a+');
+
+        /*if (filesize($csvFile) === 0) {
             // archivo vacío, escribimos encabezado
             $header = "Fecha y hora actual | Valor del apellido | Valor del nombre | Email\n";
             fwrite($archivoLog, $header);
-        }
-        
-        $dateTime = date('d/m/Y H:i:s');
-        $textoLog = "$dateTime | $apellido | $nombre | $email\n";
-        fwrite($archivoLog, $textoLog);
-        fclose($archivoLog);
+        }*/
+
+        //fwrite($archivoLog, $textoLog);
+        //fclose($archivoLog);
 
         $MensajeOk .= "<strong>Registro correcto!.</strong> [Log de registros <a href='$csvFile' target='_blank'>aqui</a>] ";
     }
