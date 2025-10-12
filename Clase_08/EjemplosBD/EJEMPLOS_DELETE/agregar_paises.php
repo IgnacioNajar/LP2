@@ -1,8 +1,8 @@
 <?php
 $Listado = array();
-$Host = 'localhost';
-$User = 'root';
-$Password = '';
+$Host = 'db';
+$User = 'nacho';
+$Password = '1234';
 $BaseDeDatos = 'panel';
 
 // Activar que mysqli lance excepciones

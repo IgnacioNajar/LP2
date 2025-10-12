@@ -2,9 +2,9 @@
 $Listado = array();
 
 // Datos de conexión
-$Host = 'localhost';
-$User = 'root';
-$Password = '';
+$Host = 'db';
+$User = 'nacho';
+$Password = '1234';
 $BaseDeDatos = 'panel';
 
 // Activar que mysqli lance excepciones
@@ -19,7 +19,7 @@ try {
         /*****************************************************/
         // Eliminación si viene código por URL
         if (!empty($_GET['codigo'])) {
-            $codigo = intval($_GET['codigo']); // seguridad básica
+            $codigo = intval($_GET['codigo']);
             $SQL_Delete = "DELETE FROM pais WHERE id = $codigo";
             mysqli_query($linkConexion, $SQL_Delete);
             echo "Se ha borrado el código $codigo<br />";

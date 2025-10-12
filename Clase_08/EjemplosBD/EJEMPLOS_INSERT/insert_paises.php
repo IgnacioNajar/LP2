@@ -1,7 +1,7 @@
 <?php
-$host = 'localhost';
-$user = 'root';
-$password = '';
+$host = 'db';
+$user = 'nacho';
+$password = '1234';
 $database = 'panel';
 
 // Activar que mysqli lance excepciones

@@ -27,7 +27,7 @@ if ($tipo_destino == 'EXO') { //Destinos Exoticos: 4 lugares
     $cantidad_personas_2 = 2;
 
     //Datos del tercer lugar
-    $titulo_lugar_3 = 'Descubri la sabana Sudafrica';
+    $titulo_lugar_3 = 'Descubri la sabana Sudafricana';
     $nombre_lugar_3 = 'Sudafrica';
     $descripcion_lugar_3 = 'Disfruta de un safari como nunca antes!';
     $ruta_img_3 = 'images_countries/EXO_sudafrica.JPG';

@@ -1,7 +1,7 @@
 <?php
-$Host = 'localhost';
-$User = 'root';
-$Password = '';
+$Host = 'db';
+$User = 'nacho';
+$Password = '1234';
 $BaseDeDatos='panel';
 
 try {
