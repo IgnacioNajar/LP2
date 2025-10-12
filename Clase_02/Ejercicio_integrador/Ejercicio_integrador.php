@@ -10,7 +10,7 @@ if ($tipo_destino == 'EXO') { //Destinos Exoticos: 4 lugares
 
     //Datos del primer lugar
     $titulo_lugar_1 = 'Descubri el Taj Mahal';
-    $nombre_lugar_1 = 'Agra, India';
+    $nombre_lugar_1 = 'India';
     $descripcion_lugar_1 = 'Disfruta el Taj Mahal como nunca antes!';
     $ruta_img_1 = 'images_countries/EXO_india.JPG';
     $precio_lugar_1 = 349.00;
