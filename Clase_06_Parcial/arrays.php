@@ -72,6 +72,6 @@ $listadoViajes = [
         'estado' => $estadoViaje['noIniciado'],
         'pesoTotal' => 1100,
         'cantidadPeajes' => 4
-    ],
+    ]
 ];
 ?>
