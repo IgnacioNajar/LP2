@@ -130,6 +130,10 @@ require_once 'funciones/validaciones_tarea4.php';
                                                 <input type="radio" name="Sexo" id="SexoM" value="M"
                                                     <?= (isset($_POST['Sexo']) && $_POST['Sexo'] == 'M') ? 'checked' : '' ?>> Masculino
                                             </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="Sexo" id="SexoO" value="O"
+                                                    <?= (isset($_POST['Sexo']) && $_POST['Sexo'] == 'O') ? 'checked' : '' ?>> Otro
+                                            </label>
                                         </div>
 
                                         <div class="form-group">

@@ -1,4 +1,4 @@
-<?php 
+<?php
 //voy a necesitar la conexion: incluyo la funcion de Conexion.
 require_once 'funciones/conexion.php';
 
@@ -6,10 +6,15 @@ require_once 'funciones/conexion.php';
 //no envio parametros porque ya los tiene definidos por defecto
 $MiConexion = ConexionBD();
 
+if(!$MiConexion) {
+    echo 'Error al conectar con la base de datos.';
+    exit();
+}
+
 //ahora voy a llamar el script con la funcion que genera mi listado
 require_once 'funciones/select_usuarios.php';
 
-//voy a ir listando lo necesario para trabajar en este script: 
+//voy a ir listando lo necesario para trabajar en este script:
 $ListadoUsuarios = Listar_Usuarios($MiConexion);
 $CantidadUsuarios = count($ListadoUsuarios);
 ?>
@@ -36,8 +41,8 @@ $CantidadUsuarios = count($ListadoUsuarios);
 
             <?php require_once 'user.inc.php'; ?>
             <!-- /.navbar-top-links -->
-            
-            <?php require_once 'menu.inc.php'; ?>           
+
+            <?php require_once 'menu.inc.php'; ?>
             <!-- /.navbar-static-side -->
         </nav>
 
@@ -53,7 +58,7 @@ $CantidadUsuarios = count($ListadoUsuarios);
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Listado de Usuarios desde mi BD
+                            Listado de <?= $CantidadUsuarios; ?> usuarios desde mi BD
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -68,17 +73,20 @@ $CantidadUsuarios = count($ListadoUsuarios);
                                             <th>Pais</th>
                                             <th>Nivel</th>
                                             <th>Sexo</th>
-
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php for ($i=0; $i<$CantidadUsuarios; $i++) { ?>
+                                        <?php foreach($ListadoUsuarios as $Usuario): ?>
                                             <tr>
-                                                <td><?php echo $ListadoUsuarios[$i]['XXXX']; ?></td>
-                                                <td><?php echo $ListadoUsuarios[$i]['YYYY']; ?></td>
-                                                <td><?php echo $ListadoUsuarios[$i]['ZZZZ']; ?></td>
+                                                <td><?= $Usuario['id']; ?></td>
+                                                <td><?= $Usuario['apellido']; ?></td>
+                                                <td><?= $Usuario['nombre']; ?></td>
+                                                <td><?= $Usuario['email']; ?></td>
+                                                <td><?= $Usuario['pais']; ?></td>
+                                                <td><?= $Usuario['nivel']; ?></td>
+                                                <td><?= $Usuario['sexo']; ?></td>
                                             </tr>
-                                        <?php } ?>
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>

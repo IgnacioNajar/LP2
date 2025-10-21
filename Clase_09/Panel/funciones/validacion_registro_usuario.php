@@ -1,43 +1,70 @@
-<?php                      
-function Validar_Datos() {
-    $vMensaje='';
-    
-    if (strlen($_POST['Nombre']) < 3) {
-        $vMensaje.='Debes ingresar un nombre con al menos 3 caracteres. <br />';
-    }
-    if (strlen($_POST['Apellido']) < 3) {
-        $vMensaje.='Debes ingresar un apellido con al menos 3 caracteres. <br />';
-    }
-    if (strlen($_POST['Email']) < 5) {
-        $vMensaje.='Debes ingresar un correo con al menos 5 caracteres. <br />';
+<?php
+function validarCampos() {
+    $MensajeError = "";
+
+    // Limpiamos y asignamos los campos
+    $nombre = strip_tags(trim($_POST['Nombre'] ?? ''));
+    $apellido = strip_tags(trim($_POST['Apellido'] ?? ''));
+    $email = strip_tags(trim($_POST['Email'] ?? ''));
+    $password = trim($_POST['Password'] ?? '');
+    $passwordReingresada = trim($_POST['PasswordReingresada'] ?? '');
+    $pais = isset($_POST['Pais']) ? (int)$_POST['Pais'] : 0; // ID como entero
+    $sexo = strip_tags(trim($_POST['Sexo'] ?? ''));
+    $condiciones = isset($_POST['Condiciones']); // booleano
+
+    // Validación de nombre
+    if (empty($nombre)) {
+        $MensajeError .= "Por favor, ingresá tu nombre.<br>";
+    } elseif (strlen($nombre) < 3) {
+        $MensajeError .= "El nombre debe tener al menos 3 caracteres.<br>";
     }
 
-    if (strlen($_POST['Clave']) ==0 ) {
-        $vMensaje.='Debes ingresar la clave. <br />';
-    }elseif ($_POST['Clave'] != $_POST['ReClave']) {
-        $vMensaje.='Las claves ingresadas deben coincidir. <br />';
-    }
-    
-    if (empty($_POST['Pais']) ) {
-        $vMensaje.='Debes seleccionar tu pais. <br />';
-    }
-    if (empty($_POST['Sexo'])) {
-        $vMensaje.='Debes seleccionar el sexo. <br />';
-    }
-    if (empty($_POST['Condiciones'])) {
-        $vMensaje.='Debes aceptar los términos y condiciones para tu registro. <br />';
+    // Validación de apellido
+    if (empty($apellido)) {
+        $MensajeError .= "Por favor, ingresá tu apellido.<br>";
+    } elseif (strlen($apellido) < 3) {
+        $MensajeError .= "El apellido debe tener al menos 3 caracteres.<br>";
     }
 
-    
-    //con esto aseguramos que limpiamos espacios y limpiamos de caracteres de codigo ingresados
-    foreach($_POST as $Id=>$Valor){
-        $_POST[$Id] = trim($_POST[$Id]);
-        $_POST[$Id] = strip_tags($_POST[$Id]);
+    // Validación de email
+    if (empty($email)) {
+        $MensajeError .= "Por favor, ingresá tu correo electrónico.<br>";
+    } elseif (strlen($email) < 6) {
+        $MensajeError .= "El correo electrónico debe tener al menos 6 caracteres.<br>";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $MensajeError .= "Por favor, ingresá un correo electrónico válido.<br>";
     }
 
+    // Validación de contraseña
+    if (empty($password)) {
+        $MensajeError .= "Por favor, ingresá una contraseña.<br>";
+    } elseif (strlen($password) < 6) {
+        $MensajeError .= "La contraseña debe tener al menos 6 caracteres.<br>";
+    }
 
-    return $vMensaje;
+    if (empty($passwordReingresada)) {
+        $MensajeError .= "Reingresá tu contraseña para confirmarla.<br>";
+    }
 
+    if (!empty($password) && !empty($passwordReingresada) && $password !== $passwordReingresada) {
+        $MensajeError .= "Las contraseñas no coinciden.<br>";
+    }
+
+    // Validación de país
+    if ($pais <= 0) {
+        $MensajeError .= "Seleccioná tu país de residencia.<br>";
+    }
+
+    // Validación de sexo
+    if (empty($sexo) || !in_array($sexo, ['M', 'F', 'O'])) {
+        $MensajeError .= "Seleccioná un sexo válido.<br>";
+    }
+
+    // Validación de aceptación de condiciones
+    if (!$condiciones) {
+        $MensajeError .= "Debés aceptar los Términos y Condiciones para continuar.<br>";
+    }
+
+    return $MensajeError;
 }
-
 ?>

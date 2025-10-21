@@ -1,4 +1,4 @@
-<?php 
+<?php
 //voy a necesitar la conexion: incluyo la funcion de Conexion.
 require_once 'funciones/conexion.php';
 
@@ -6,11 +6,15 @@ require_once 'funciones/conexion.php';
 //no envio parametros porque ya los tiene definidos por defecto
 $MiConexion = ConexionBD();
 
+if (!$MiConexion) {
+    echo 'Error al conectar con la base de datos.';
+    exit();
+}
+
 //ahora voy a llamar el script con la funcion que genera mi listado
 require_once 'funciones/select_niveles.php';
 
-
-//voy a ir listando lo necesario para trabajar en este script: 
+//voy a ir listando lo necesario para trabajar en este script:
 $ListadoNiveles = Listar_Niveles($MiConexion);
 $CantidadNiveles = count($ListadoNiveles);
 
@@ -39,15 +43,15 @@ $CantidadNiveles = count($ListadoNiveles);
 
             <?php require_once 'user.inc.php'; ?>
             <!-- /.navbar-top-links -->
-            
-            <?php require_once 'menu.inc.php'; ?>           
+
+            <?php require_once 'menu.inc.php'; ?>
             <!-- /.navbar-static-side -->
         </nav>
 
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Listado de Niveles Registrados</h1>
+                    <h1 class="page-header">Listado de <?= $CantidadNiveles; ?> Niveles Registrados</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -69,12 +73,12 @@ $CantidadNiveles = count($ListadoNiveles);
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php for ($i=0; $i<$CantidadNiveles; $i++) { ?>
-                                            <tr>                     
-                                            <td><?php echo $ListadoNiveles[$i]['ID']; ?></td>
-                                            <td><?php echo $ListadoNiveles[$i]['NOMBRE']; ?></td>
+                                        <?php foreach ($ListadoNiveles as $indice => $nivel):  ?>
+                                            <tr>
+                                            <td><?= $nivel['id']; ?></td>
+                                            <td><?= $nivel['denominacion']; ?></td>
                                             </tr>
-                                        <?php } ?>
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 //voy a necesitar la conexion: incluyo la funcion de Conexion.
 require_once 'funciones/conexion.php';
 
@@ -6,11 +6,15 @@ require_once 'funciones/conexion.php';
 //no envio parametros porque ya los tiene definidos por defecto
 $MiConexion = ConexionBD();
 
+if (!$MiConexion) {
+    echo 'Error al conectar con la base de datos.';
+    exit();
+}
+
 //ahora voy a llamar el script con la funcion que genera mi listado
 require_once 'funciones/select_paises.php';
 
-
-//voy a ir listando lo necesario para trabajar en este script: 
+//voy a ir listando lo necesario para trabajar en este script:
 $ListadoPaises = Listar_Paises($MiConexion);
 $CantidadPaises = count($ListadoPaises);
 ?>
@@ -33,12 +37,12 @@ $CantidadPaises = count($ListadoPaises);
                 </button>
                 <a class="navbar-brand" href="index.php">Pagina inicial</a>
             </div>
-            <!-- /.navbar-header -->                             
+            <!-- /.navbar-header -->
 
             <?php require_once 'user.inc.php'; ?>
             <!-- /.navbar-top-links -->
-            
-            <?php require_once 'menu.inc.php'; ?>           
+
+            <?php require_once 'menu.inc.php'; ?>
             <!-- /.navbar-static-side -->
         </nav>
 
@@ -54,7 +58,7 @@ $CantidadPaises = count($ListadoPaises);
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Listado de Paises desde mi BD
+                            Listado de <?= $CantidadPaises; ?> paises desde mi BD
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -67,12 +71,12 @@ $CantidadPaises = count($ListadoPaises);
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php for ($i=0; $i<$CantidadPaises; $i++) { ?>
+                                        <?php foreach ($ListadoPaises as $indice => $pais): ?>
                                             <tr>
-                                            <td><?php echo $ListadoPaises[$i]['ID']; ?></td>
-                                            <td><?php echo $ListadoPaises[$i]['NOMBRE']; ?></td>
+                                            <td><?= $pais['id']; ?></td>
+                                            <td><?= $pais['nombre']; ?></td>
                                             </tr>
-                                        <?php } ?>
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>
