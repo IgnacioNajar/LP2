@@ -22,5 +22,4 @@ function Listar_Usuarios($vConexion) {
 
     return $Listado;
 }
-
 ?>

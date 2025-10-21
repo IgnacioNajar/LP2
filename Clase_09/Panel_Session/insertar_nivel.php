@@ -8,7 +8,7 @@ if (empty($_SESSION['Usuario_Nombre'])) {
 }
 
 require_once 'funciones/conexion.php';
-require_once 'funciones/insertar_pais.php';
+require_once 'funciones/insertar_nivel.php';
 
 $MiConexion = ConexionBD();
 $Mensaje = '';
@@ -16,7 +16,7 @@ $Estilo = 'warning'; // default
 
 // Procesar formulario
 if (isset($_POST['BotonRegistrar'])) {
-    $resultado = InsertarPais($MiConexion); // Tu función lee $_POST['Nombre']
+    $resultado = InsertarNivel($MiConexion); // Tu función lee $_POST['Nombre']
     $Mensaje = $resultado['mensaje'];
     $Estilo = $resultado['success'] ? 'success' : 'danger';
 }
@@ -39,14 +39,14 @@ require_once 'header.inc.php';
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Formulario de Registro de Nuevo País</h1>
+                <h1 class="page-header">Formulario de Registro de Nuevo Nivel</h1>
             </div>
         </div>
 
         <div class="row">
             <div class="col-lg-6">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Ingresa datos del nuevo país</div>
+                    <div class="panel-heading">Ingresa datos del nuevo nivel</div>
                     <div class="panel-body">
 
                         <?php if (!empty($Mensaje)) { ?>

@@ -1,44 +1,57 @@
-<?php 
-function DatosLogin($vUsuario, $vClave, $vConexion){
-    $Usuario=array();
-         
-    $SQL="SELECT U.Id, U.Nombre, U.Apellido, U.IdNivel, U.Imagen, U.Sexo, U.Activo, U.Imagen,
-    N.Denominacion as NombreNivel
-     FROM Usuarios U, Niveles N
-     WHERE U.IdNivel = N.Id
-     AND  Email='$vUsuario' AND Clave='$vClave'   ";
+<?php
+function DatosLogin($vUsuario, $vClave, $vConexion)
+{
+    $Usuario = [];
 
-    $rs = mysqli_query($vConexion, $SQL);
-        
-    $data = mysqli_fetch_array($rs) ;
-    if (!empty($data)) {
-        $Usuario['ID'] = $data['Id'];
-        $Usuario['NOMBRE'] = $data['Nombre'];
-        $Usuario['APELLIDO'] = $data['Apellido'];
-        $Usuario['NIVEL'] = $data['IdNivel'];
-        $Usuario['NIVEL_NOMBRE'] = $data['NombreNivel'];
-        
-        switch ($data['Sexo']) {
+    // Preparar la consulta
+    $stmt = $vConexion->prepare(
+        "SELECT
+            u.id AS id,
+            u.nombre AS nombre,
+            u.apellido AS apellido,
+            u.email AS email,
+            u.nivelId AS nivelId,
+            u.imagen AS imagen,
+            u.sexo AS sexo,
+            u.activo AS activo,
+            u.clave AS clave_hash,
+            n.denominacion AS nombreNivel
+         FROM usuario u
+         JOIN nivel n ON u.nivelId = n.id
+         WHERE u.email = ?"
+    );
+    $stmt->bind_param("s", $vUsuario);
+    $stmt->execute();
+    $rs = $stmt->get_result();
+    $data = $rs->fetch_assoc();
+    $stmt->close();
+
+    // Verificar que el usuario existe y la contraseña es correcta
+    if ($data && password_verify($vClave, $data['clave_hash'])) {
+        $Usuario = [
+            'ID'           => $data['id'],
+            'NOMBRE'       => $data['nombre'],
+            'APELLIDO'     => $data['apellido'],
+            'EMAIL'        => $data['email'],
+            'NIVEL'        => $data['nivelId'],
+            'NIVEL_NOMBRE' => $data['nombreNivel'],
+            'ACTIVO'       => $data['activo'],
+            'IMG'          => $data['imagen'] ?: 'user.png'
+        ];
+
+        // Saludo según el sexo
+        switch ($data['sexo']) {
             case 'F':
                 $Usuario['SALUDO'] = 'Bienvenida';
                 break;
             case 'M':
                 $Usuario['SALUDO'] = 'Bienvenido';
                 break;
-            case 'O':
-                $Usuario['SALUDO'] = 'Hola ';
+            default:
+                $Usuario['SALUDO'] = 'Hola';
                 break;
         }
-        
-
-        if (empty( $data['Imagen'])) {
-            $data['Imagen'] = 'user.png'; 
-        }
-        $Usuario['IMG'] = $data['Imagen'];
-        $Usuario['ACTIVO'] = $data['Activo'];
-        
     }
+
     return $Usuario;
 }
-
-?>

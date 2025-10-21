@@ -1,14 +1,16 @@
 <?php
-      
-//aqui tengo parametros por defecto, cuando la llame con parentesis vacios, usarà estos:
-function ConexionBD($Host = 'localhost' ,  $User = 'root',  $Password = '', $BaseDeDatos='panel' ) {
+function ConexionBD($Host = 'db', $User = 'nacho', $Password = '1234', $BaseDeDatos = 'panel') {
+    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
-    //procedo al intento de conexion con esos parametros
-    $linkConexion = mysqli_connect($Host, $User, $Password, $BaseDeDatos);
-    if ($linkConexion!=false) 
+    try {
+        $linkConexion = mysqli_connect($Host, $User, $Password, $BaseDeDatos);
+        $linkConexion->set_charset('utf8mb4');
         return $linkConexion;
-    else 
-        die ('No se pudo establecer la conexión.');
 
+    } catch (mysqli_sql_exception $e) {
+        error_log(date('Y-m-d H:i:s') . " - Error DB: " . $e->getMessage() . "\n", 3, __DIR__ . '/../logs/db_errors.log');
+
+        return null;
+    }
 }
 ?>
