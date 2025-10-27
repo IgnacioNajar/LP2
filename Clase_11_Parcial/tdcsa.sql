@@ -28,8 +28,8 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `niveles` (
-  `Id` int(11) NOT NULL,
-  `Denominacion` varchar(50) DEFAULT NULL
+  `Id` INT NOT NULL PRIMARY KEY,
+  `Denominacion` VARCHAR(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
@@ -38,7 +38,8 @@ CREATE TABLE `niveles` (
 
 INSERT INTO `niveles` (`Id`, `Denominacion`) VALUES
 (1, 'Admin'),
-(2, 'Operador');
+(2, 'Operador'),
+(3, 'Chofer');
 
 -- --------------------------------------------------------
 
@@ -47,9 +48,10 @@ INSERT INTO `niveles` (`Id`, `Denominacion`) VALUES
 --
 
 CREATE TABLE `transportes` (
-  `Marca` int(11) NOT NULL,
-  `Modelo` varchar(50) DEFAULT NULL,
-  `Disponible` varchar(50) DEFAULT '1'
+  `Marca` INT NOT NULL,
+  `Modelo` VARCHAR(50) DEFAULT NULL,
+  `Anio` SMALLINT UNSIGNED DEFAULT NULL,
+  `Disponible` TINYINT DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
@@ -59,8 +61,8 @@ CREATE TABLE `transportes` (
 --
 
 CREATE TABLE `usuarios` (
-  `Id` int(11) NOT NULL,
-  `Nombre` varchar(50) DEFAULT NULL
+  `Id` INT NOT NULL,
+  `Nombre` VARCHAR(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
@@ -81,7 +83,7 @@ ALTER TABLE `niveles`
 -- AUTO_INCREMENT de la tabla `niveles`
 --
 ALTER TABLE `niveles`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Id` INT NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -1,12 +1,12 @@
-<?php 
+<?php
 require_once 'funciones/conexion.php';
-$MiConexion=ConexionBD(); 
+$MiConexion=ConexionBD();
 
 require_once 'funciones/select_paises.php';
 $ListadoPaises = Listar_Paises($MiConexion);
 $CantidadPaises= count($ListadoPaises);
 
-require_once 'funciones/validacion_registro_usuario.php'; 
+require_once 'funciones/validacion_registro_usuario.php';
 require_once 'funciones/insertar_usuarios.php';
 
 
@@ -14,12 +14,12 @@ $Mensaje='';
 $Estilo='warning';
 if (!empty($_POST['BotonRegistrar'])) {
     //estoy en condiciones de poder validar los datos
-    $Mensaje=Validar_Datos();
+    $Mensaje=validarCampos();
     if (empty($Mensaje)) {
         if (InsertarUsuarios($MiConexion) != false) {
             $Mensaje = 'Se ha registrado correctamente.';
-            $_POST = array(); 
-            $Estilo = 'success'; 
+            $_POST = array();
+            $Estilo = 'success';
         }
     }
 }
@@ -44,7 +44,7 @@ require_once 'header.inc.php'; ?>
                 <a class="navbar-brand" href="login.php">Ingresar al panel</a>
             </div>
             <!-- /.navbar-header -->
-           
+
         </nav>
 
         <div id="page-wrapper">
@@ -70,27 +70,27 @@ require_once 'header.inc.php'; ?>
                                         <br />
                                     </div>
                                     <div class="col-lg-6">
-                                        
+
                                         <?php if (!empty($Mensaje)) { ?>
                                         <div class="alert alert-<?php echo $Estilo; ?> alert-dismissable">
                                         <?php echo $Mensaje; ?>
                                         </div>
                                         <?php } ?>
-                                        
+
                                         <div class="form-group">
                                             <label>Nombre:</label>
-                                            <input class="form-control" type="text" name="Nombre" id="nombre" 
+                                            <input class="form-control" type="text" name="Nombre" id="nombre"
                                             value="<?php echo !empty($_POST['Nombre']) ? $_POST['Nombre'] : ''; ?>">
                                         </div>
                                         <div class="form-group">
                                             <label>Apellido:</label>
-                                            <input class="form-control" type="text" name="Apellido" id="apellido" 
+                                            <input class="form-control" type="text" name="Apellido" id="apellido"
                                             value="<?php echo !empty($_POST['Apellido']) ? $_POST['Apellido'] : ''; ?>">
                                         </div>
 
                                         <div class="form-group">
                                             <label>Email:</label>
-                                            <input class="form-control" type="email" name="Email" id="email" 
+                                            <input class="form-control" type="email" name="Email" id="email"
                                             value="<?php echo !empty($_POST['Email']) ? $_POST['Email'] : ''; ?>">
                                         </div>
 
@@ -108,7 +108,7 @@ require_once 'header.inc.php'; ?>
                                             <label>Pais</label>
                                             <select class="form-control" name="Pais" id="pais">
                                                 <option value="">Selecciona...</option>
-                                                <?php 
+                                                <?php
                                                 $selected='';
                                                 for ($i=0 ; $i < $CantidadPaises ; $i++) {
                                                     if (!empty($_POST['Pais']) && $_POST['Pais'] ==  $ListadoPaises[$i]['ID']) {
@@ -129,17 +129,17 @@ require_once 'header.inc.php'; ?>
                                             <label>Sexo:</label>
                                             <br />
                                             <label class="radio-inline">
-                                                <input type="radio" name="Sexo" id="SexoF" 
-                                                value="F" 
+                                                <input type="radio" name="Sexo" id="SexoF"
+                                                value="F"
                                                 <?php echo (!empty($_POST['Sexo']) && $_POST['Sexo'] == 'F') ? 'checked':''; ?>  >Femenino
                                             </label>
                                             <label class="radio-inline">
-                                                <input type="radio" name="Sexo" id="SexoM" 
-                                                value="M" 
+                                                <input type="radio" name="Sexo" id="SexoM"
+                                                value="M"
                                                 <?php echo (!empty($_POST['Sexo']) && $_POST['Sexo'] == 'M') ? 'checked':''; ?>>Masculino
                                             </label>
                                             <label class="radio-inline">
-                                                <input type="radio" name="Sexo" id="SexoO" 
+                                                <input type="radio" name="Sexo" id="SexoO"
                                                 value="O"
                                                 <?php echo (!empty($_POST['Sexo']) && $_POST['Sexo'] == 'O') ? 'checked':''; ?>>Otro
                                             </label>
@@ -149,7 +149,7 @@ require_once 'header.inc.php'; ?>
                                             <br />
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" name="Condiciones"  
+                                                    <input type="checkbox" name="Condiciones"
                                                     value="SI"
                                                     <?php echo (!empty($_POST['Condiciones']) && $_POST['Condiciones'] == 'SI') ? 'checked':''; ?>
                                                     >Acepto los Términos y Condiciones.

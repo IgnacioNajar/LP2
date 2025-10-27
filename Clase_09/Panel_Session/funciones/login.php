@@ -16,9 +16,9 @@ function DatosLogin($vUsuario, $vClave, $vConexion)
             u.activo AS activo,
             u.clave AS clave_hash,
             n.denominacion AS nombreNivel
-         FROM usuario u
-         JOIN nivel n ON u.nivelId = n.id
-         WHERE u.email = ?"
+        FROM usuario u
+        JOIN nivel n ON u.nivelId = n.id
+        WHERE u.email = ?"
     );
     $stmt->bind_param("s", $vUsuario);
     $stmt->execute();
