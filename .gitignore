@@ -1,7 +1,17 @@
+# Logs de la aplicación
 logs/
+
+# Configuración de VSCode
 .vscode/
+
+# Dependencias de PHP (Composer)
 vendor/
+composer.lock
+
+# Volúmenes de Docker
 db_data/
+
+# Archivos temporales
 *.tmp
 *.bak
 *.swp
