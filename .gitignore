@@ -1,2 +1,8 @@
 logs/
 .vscode/
+vendor/
+db_data/
+*.tmp
+*.bak
+*.swp
+*.sql
