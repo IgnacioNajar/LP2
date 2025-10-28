@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <?php require_once('head.php'); ?>
 
@@ -13,7 +13,7 @@
     <?php require_once('sidebar.php'); ?>
     <!-- End Sidebar-->
 
-
+    <!-- ======= Main ======= -->
     <main id="main" class="main">
 
         <div class="pagetitle">
@@ -58,10 +58,7 @@
 
             </div>
         </section>
-
     </main><!-- End #main -->
-
-
 
     <!-- ======= Footer ======= -->
     <?php require_once('footer.php'); ?>
