@@ -1,3 +1,52 @@
+<?php
+session_start();
+
+if (isset($_SESSION['usuario'])) {
+  header('Location: index.php');
+  exit;
+}
+
+require_once 'functions/conexion.php';
+require_once 'functions/login.php';
+require_once 'functions/validar_login.php';
+require_once 'functions/log.php';
+
+$miConexion = ConexionBD();
+$mensaje = '';
+
+if (!$miConexion) {
+  $mensaje = 'Error al conectar con la base de datos';
+  exit;
+}
+
+$username = '';
+
+if (isset($_POST['boton_login'])) {
+  $username = trim($_POST['username'] ?? '');
+  $password = $_POST['password'] ?? '';
+
+  $mensaje = validarCamposLogin($username, $password);
+
+  if (empty($mensaje)) {
+    $usuarioLogueado = datosLogin($username, $password, $miConexion);
+
+    if (!empty($usuarioLogueado)) {
+      if ($usuarioLogueado['activo'] == 0) {
+        $mensaje = 'Usted no se encuentra activo en el sistema';
+      } else {
+        $_SESSION['usuario'] = $usuarioLogueado;
+        header('Location: index.php');
+        registrarLog("Inicio de sesión exitoso para el usuario: $username", 'INFO');
+        exit;
+      }
+    } else {
+      $mensaje = 'Los datos ingresados son incorrectos, ingrese nuevamente';
+      registrarLog("Intento de inicio de sesión fallido para el usuario: $username", 'ERROR');
+    }
+  }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,31 +79,34 @@
                                         <p class="text-center small">Ingresa tu datos de usuario y clave</p>
                                     </div>
 
-                                    <form class="row g-3 needs-validation" novalidate>
+                                    <form class="row g-3 needs-validation" method="post" novalidate>
+
+                                    <?php if (!empty($mensaje)): ?>
                                         <div class="alert alert-warning alert-dismissible fade show" role="alert">
                                             <i class="bi bi-exclamation-triangle me-1"></i>
-                                            Los datos son incorrectos. Intenta nuevamente.
+                                            <?= $mensaje; ?>
                                         </div>
-
+                                    <?php endif; ?>
 
                                         <div class="col-12">
                                             <label for="yourUsername" class="form-label">Usuario</label>
                                             <div class="input-group has-validation">
                                                 <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                                <input class="form-control" id="yourUsername" required>
-                                                <div class="invalid-feedback">Ingresa tu usuario.</div>
+                                                <input class="form-control" id="yourUsername" name="username" required
+                                                value="<?= htmlspecialchars($username, ENT_QUOTES); ?>">
+                                                <div class="invalid-feedback">Ingresa tu usuario</div>
                                             </div>
                                         </div>
 
                                         <div class="col-12">
                                             <label for="yourPassword" class="form-label">Clave</label>
-                                            <input class="form-control" id="yourPassword" required>
+                                            <input class="form-control" id="yourPassword" name="password" type="password" required>
                                             <div class="invalid-feedback">Ingresa tu clave</div>
                                         </div>
 
 
                                         <div class="col-12">
-                                            <button class="btn btn-primary w-100">Login</button>
+                                            <button class="btn btn-primary w-100" type="submit" name="boton_login">Login</button>
                                         </div>
                                     </form>
 

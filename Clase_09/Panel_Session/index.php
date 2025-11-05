@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Redirige al login si no hay sesión activa
 if (empty($_SESSION['Usuario_Nombre'])) {
     header('Location: cerrarsesion.php');
     exit;

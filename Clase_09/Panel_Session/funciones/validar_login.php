@@ -13,6 +13,6 @@ function ValidarCamposLogin($email, $password) {
         $Mensaje = 'Por favor ingresá tu contraseña.';
     }
 
-    return $Mensaje; // Retorna mensaje vacío si todo está bien
+    return $Mensaje;
 }
 ?>

@@ -24,7 +24,6 @@ if (!empty($_POST['BotonRegistrar'])) {
     }
 }
 
-
 require_once 'header.inc.php'; ?>
 
 </head>

@@ -1,3 +1,18 @@
+<?php
+session_start();
+if (!isset($_SESSION['usuario'])) {
+  header('Location: login.php');
+}
+
+$usuario = $_SESSION['usuario'];
+require_once('functions/select_viajes.php');
+require_once('functions/conexion.php');
+$monto = '';
+
+$conexion = conexionBd();
+$viajes = listarViajes($conexion);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,60 +65,25 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                  <?php foreach ($viajes as $indice => $viaje): ?>
                                     <tr class="table-success" data-bs-toggle="tooltip" data-bs-placement="left"
                                         data-bs-original-title="Viaje realizado">
-                                        <th scope="row">1</th>
-                                        <td>02/11/2025</td>
-                                        <td>Capilla del Monte</td>
-                                        <td>Iveco - Daily Furgon - AC206JK</td>
-                                        <td>Alvarez, Marcos</td>
-                                        <td>$ 300.000</td>
-                                        <td>$ 30.000 (10%)</td>
+                                        <th scope="row"><?= $indice + 1; ?></th>
+                                        <td><?= $viaje['fechaViaje']; ?></td>
+                                        <td><?= $viaje['destino']; ?></td>
+                                        <td><?= $viaje['transporte']; ?></td>
+                                        <td><?= $viaje['nombreChofer']; ?></td>
+                                        <td>$<?= $viaje['costoViaje']; ?></td>
+                                        <?php if (!$usuario['nivelId'] == 2): ?>
+                                          <td>$<?= $monto .= $viaje['montoChofer'];
+                                          if (!$usuario['nivelId'] == 3) {
+                                            $monto .= ' ' . '(' . $viaje['porcentaje'] . '%)';
+                                          }
+                                          ?>
+                                            <?php endif; ?>
+                                          </td>
                                     </tr>
-
-                                    <tr class="table-danger" data-bs-toggle="tooltip" data-bs-placement="left"
-                                        data-bs-original-title="Viaje de hoy">
-                                        <th scope="row">2</th>
-                                        <td>03/11/2025</td>
-                                        <td>Morteros</td>
-                                        <td>Scania - Serie P - AA322CX</td>
-                                        <td>Rodriguez, Ariel</td>
-                                        <td>$ 100.000</td>
-                                        <td>$ 15.000 (15%)</td>
-                                    </tr>
-
-                                    <tr class="table-danger" data-bs-toggle="tooltip" data-bs-placement="left"
-                                        data-bs-original-title="Viaje de hoy">
-                                        <th scope="row">3</th>
-                                        <td>03/11/2025</td>
-                                        <td>Toledo</td>
-                                        <td>Iveco - Daily Chasis - AD698HA</td>
-                                        <td>Zapata, Joaquin </td>
-                                        <td>$ 250.000</td>
-                                        <td>$ 25.000 (10%)</td>
-                                    </tr>
-
-                                    <tr class="table-warning" data-bs-toggle="tooltip" data-bs-placement="left"
-                                        data-bs-original-title="Viaje de mañana">
-                                        <th scope="row">4</th>
-                                        <td>04/11/2025</td>
-                                        <td>Capilla del Monte</td>
-                                        <td>Scania - Serie P - AA322CX</td>
-                                        <td>Perez, Juan </td>
-                                        <td>$ 350.000</td>
-                                        <td>$ 70.000 (20%)</td>
-                                    </tr>
-
-                                    <tr>
-                                        <th scope="row">5</th>
-                                        <td>10/11/2025</td>
-                                        <td>Capilla del Monte</td>
-                                        <td>Scania - Serie P - AA322CX</td>
-                                        <td>Perez, Juan </td>
-                                        <td>$ 350.000</td>
-                                        <td>$ 70.000 (20%)</td>
-                                    </tr>
-
+                                <?php endforeach; ?>
 
                                 </tbody>
                             </table>

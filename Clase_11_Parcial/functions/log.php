@@ -1,16 +1,18 @@
 <?php
-function registrarLog($mensaje, $tipo = 'INFO', $archivo = 'db.log') {
-    $logDir = __DIR__ . '/../logs/';
+function registrarLog($mensaje, $tipo = 'INFO', $archivo = 'db.log')
+{
+  date_default_timezone_set('America/Argentina/Buenos_Aires');
 
-    if (!is_dir($logDir)) {
-        mkdir($logDir, 0777, true);
-    }
+  $logDir = __DIR__ . '/../logs/';
 
-    $fecha = date('d/m/Y H:i:s');
-    $cadena = "[$fecha] [$tipo] $mensaje\n";
+  if (!is_dir($logDir)) {
+    mkdir($logDir, 0777, true);
+  }
 
-    $archivo = $tipo === 'ERROR' ? 'db_errors.log' : 'db_success.log';
+  $fecha = date('d/m/Y H:i:s');
+  $cadena = "[$fecha] [$tipo] $mensaje\n";
 
-    error_log($cadena, 3, $logDir . $archivo);
+  $archivo = $tipo === 'ERROR' ? 'db_errors.log' : 'db_success.log';
+
+  error_log($cadena, 3, $logDir . $archivo);
 }
-?>

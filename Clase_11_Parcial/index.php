@@ -1,3 +1,13 @@
+<?php
+session_start();
+if (empty($_SESSION['usuario'])) {
+    header('Location: functions/cerrar_sesion.php');
+    exit;
+}
+
+$usuario = $_SESSION['usuario'];
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -17,7 +27,7 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Bienvenid@s!!</h1>
+            <h1><?= $usuario['saludo'] . ' ' . $usuario['nombre']; ?></h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active"><a href="index.html">Home</a></li>
@@ -47,7 +57,8 @@
                                             <p>Puedes seleccionar el menu de la izquierda.</p>
                                             <p>Recuerda que para el Final o para Regularidad Extraordinaria, debes presentar el panel completo.</p>
                                         </div>
-                                    </div>
+                                      </div>
+                                      <button onclick="window.location.href='functions/insertar_usuarios.php'">Insertar usuario</button>
                                 </div>
                             </div>
 

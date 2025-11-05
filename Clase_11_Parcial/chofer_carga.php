@@ -1,3 +1,51 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['usuario'])) {
+  header('Location: login.php');
+  exit;
+}
+
+$usuario = $_SESSION['usuario'];
+
+require_once('functions/conexion.php');
+require_once('functions/validar_registro_chofer.php');
+require_once('functions/insertar_chofer.php');
+
+$miConexion = conexionBd();
+
+$username = '';
+
+if (isset($_POST['boton_registrar'])) {
+  $apellido = strip_tags(trim($_POST['apellido'] ?? ''));
+  $nombre = strip_tags(trim($_POST['nombre'] ?? ''));
+  $dni = strip_tags(trim($_POST['dni'] ?? ''));
+  $username = strip_tags(trim($_POST['usuario'] ?? ''));
+  $password = $_POST['password'] ?? '';
+
+  $mensaje = validarCamposRegistroChofer($apellido, $nombre, $dni, $username, $password);
+
+  if (empty($mensaje)) {
+    $choferRegistrado = insertarChofer($miConexion, $apellido, $nombre, $dni, $username, $password);
+
+    if (!empty($choferRegistrado)) {
+
+      if ($usuarioRegistrado['activo'] == 0) {
+        registrarLog("Inicio de sesión exitoso para el usuario: $username", 'INFO');
+        $mensaje = 'Usted no se encuentra activo en el sistema';
+      } else {
+        $_SESSION['usuario'] = $usuarioRegistrado;
+        header('Location: index.php');
+        exit;
+      }
+    } else {
+      $mensaje = 'Los datos ingresados son incorrectos, ingrese nuevamente';
+      registrarLog("Intento de inicio de sesión fallido para el usuario: $username", 'ERROR');
+    }
+  }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -50,7 +98,7 @@
                                 Los datos se guardaron correctamente!
                             </div>
 
-                            <form class="row g-3">
+                            <form class="row g-3" method="post">
 
                                 <div class="col-12">
                                     <label for="Apellido" class="form-label">Apellido (*)</label>
