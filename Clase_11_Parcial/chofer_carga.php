@@ -1,6 +1,11 @@
 <?php
 session_start();
 
+if (isset($_GET['exito'])) {
+  $clase = 'success';
+  $mensaje = 'El chofer se ha registrado correctamente.';
+}
+
 if (!isset($_SESSION['usuario'])) {
   header('Location: login.php');
   exit;
@@ -14,13 +19,13 @@ require_once('functions/insertar_chofer.php');
 
 $miConexion = conexionBd();
 
-$username = '';
-
 if (isset($_POST['boton_registrar'])) {
+  $clase = 'warning';
+
   $apellido = strip_tags(trim($_POST['apellido'] ?? ''));
   $nombre = strip_tags(trim($_POST['nombre'] ?? ''));
   $dni = strip_tags(trim($_POST['dni'] ?? ''));
-  $username = strip_tags(trim($_POST['usuario'] ?? ''));
+  $username = strip_tags(trim($_POST['username'] ?? ''));
   $password = $_POST['password'] ?? '';
 
   $mensaje = validarCamposRegistroChofer($apellido, $nombre, $dni, $username, $password);
@@ -28,18 +33,14 @@ if (isset($_POST['boton_registrar'])) {
   if (empty($mensaje)) {
     $choferRegistrado = insertarChofer($miConexion, $apellido, $nombre, $dni, $username, $password);
 
-    if (!empty($choferRegistrado)) {
+    if ($choferRegistrado) {
+      $clase = 'success';
+      $mensaje = 'El chofer se ha registrado correctamente.';
 
-      if ($usuarioRegistrado['activo'] == 0) {
-        registrarLog("Inicio de sesión exitoso para el usuario: $username", 'INFO');
-        $mensaje = 'Usted no se encuentra activo en el sistema';
-      } else {
-        $_SESSION['usuario'] = $usuarioRegistrado;
-        header('Location: index.php');
-        exit;
-      }
+      header('Location: chofer_carga.php?exito=1');
+      exit;
     } else {
-      $mensaje = 'Los datos ingresados son incorrectos, ingrese nuevamente';
+      $mensaje = 'Este nombre de usuario ya existe. Pruebe con otro.';
       registrarLog("Intento de inicio de sesión fallido para el usuario: $username", 'ERROR');
     }
   }
@@ -88,45 +89,58 @@ if (isset($_POST['boton_registrar'])) {
                                 Los campos indicados con (*) son requeridos
                             </div>
 
-                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <?php if (!empty($mensaje)) {
+                              if ($clase == 'warning') { ?>
+                              <div class="alert alert-warning alert-dismissible fade show" role="alert">
                                 <i class="bi bi-exclamation-triangle me-1"></i>
-                                Mensajes de Alerta por validaciones
-                            </div>
+                                <?= $mensaje; ?>
+                              </div>
+                            <?php } else { ?>
+                              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                  <i class="bi bi-check-circle me-1"></i>
+                                  <?= $mensaje; ?>
+                              </div>
+                            <?php }
+                            } ?>
 
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <i class="bi bi-check-circle me-1"></i>
-                                Los datos se guardaron correctamente!
-                            </div>
-
-                            <form class="row g-3" method="post">
+                            <form class="row g-3" method="post" autocomplete="off">
 
                                 <div class="col-12">
                                     <label for="Apellido" class="form-label">Apellido (*)</label>
-                                    <input type="text" class="form-control" id="apellido">
+                                    <input type="text" class="form-control" id="apellido" name="apellido"
+                                    value="<?= isset($_POST['apellido']) ? htmlspecialchars($apellido, ENT_QUOTES) : ''; ?>"
+                                    autocomplete="off">
                                 </div>
 
                                 <div class="col-12">
                                     <label for="Nombre" class="form-label">Nombre (*)</label>
-                                    <input type="text" class="form-control" id="nombre">
+                                    <input type="text" class="form-control" id="nombre" name="nombre"
+                                    value="<?= isset($_POST['nombre']) ? htmlspecialchars($nombre, ENT_QUOTES) : ''; ?>"
+                                    autocomplete="off">
                                 </div>
 
                                 <div class="col-12">
                                     <label for="dni" class="form-label">DNI (*)</label>
-                                    <input type="text" class="form-control" id="dni">
+                                    <input type="text" class="form-control" id="dni" name="dni"
+                                    value="<?= isset($_POST['dni']) ? htmlspecialchars($dni, ENT_QUOTES) : ''; ?>"
+                                    autocomplete="off">
                                 </div>
                                 <div class="col-12">
                                     <label for="user" class="form-label">Usuario</label>
-                                    <input type="text" class="form-control" id="user">
+                                    <input type="text" class="form-control" id="user" name="username"
+                                    value="<?= isset($_POST['username']) ? htmlspecialchars($username, ENT_QUOTES) : ''; ?>"
+                                    autocomplete="new-username">
                                 </div>
                                 <div class="col-12">
                                     <label for="pass" class="form-label">Clave</label>
-                                    <input type="text" class="form-control" id="pass">
+                                    <input type="password" class="form-control" id="pass" name="password"
+                                    autocomplete="new-password">
                                 </div>
 
                                 <div class="text-center">
-                                    <button class="btn btn-primary">Registrar</button>
-                                    <button type="reset" class="btn btn-secondary">Limpiar Campos</button>
-                                    <a href="index.html" class="text-primary fw-bold">Volver al index</a>
+                                  <a href="index.php" class="btn btn-primary">Volver al inicio</a>
+                                  <button type="reset" class="btn btn-secondary">Limpiar Campos</button>
+                                  <button class="btn btn-success" type="submit" name="boton_registrar">Registrar</button>
                                 </div>
                             </form>
 

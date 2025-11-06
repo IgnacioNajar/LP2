@@ -30,15 +30,17 @@ function datosLogin($vUsuario, $vClave, $vConexion)
 
     if ($data && password_verify($vClave, $data['clave_hash'])) {
         $usuario = [
-            'id'          => $data['id'],
-            'nombre'      => $data['nombre'],
-            'apellido'    => $data['apellido'],
-            'dni'         => $data['dni'],
-            'userName'    => $data['usuario'],
-            'nivel'       => $data['nivelId'],
-            'nivelNombre' => $data['nombreNivel'],
-            'activo'      => $data['activo'],
-            'imagen'      => $data['imagen'] ?: 'profile-img.jpg'
+            'id'            => $data['id'],
+            'nombre'        => $data['nombre'],
+            'apellido'      => $data['apellido'],
+            'dni'           => $data['dni'],
+            'userName'      => $data['usuario'],
+            'nivel'         => $data['nivelId'],
+            'fechaCreacion' => date('d/m/Y', strtotime($data['fechaCreacion'])),
+            'nivelNombre'   => $data['nombreNivel'],
+            'sexo'          => $data['sexo'],
+            'activo'        => $data['activo'],
+            'imagen'        => $data['imagen'] ?: 'profile-img.jpg'
         ];
 
         switch ($data['sexo']) {

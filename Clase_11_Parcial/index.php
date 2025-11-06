@@ -58,7 +58,6 @@ $usuario = $_SESSION['usuario'];
                                             <p>Recuerda que para el Final o para Regularidad Extraordinaria, debes presentar el panel completo.</p>
                                         </div>
                                       </div>
-                                      <button onclick="window.location.href='functions/insertar_usuarios.php'">Insertar usuario</button>
                                 </div>
                             </div>
 

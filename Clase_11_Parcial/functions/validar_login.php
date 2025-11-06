@@ -7,9 +7,10 @@ function validarCamposLogin($username, $password)
   $password = trim($password ?? '');
 
   if (empty($username)) {
-    $mensaje = 'Por favor ingresá tu nombre de usuario';
-  } elseif (empty($password)) {
-    $mensaje = 'Por favor ingresá tu contraseña';
+    $mensaje .= "Por favor ingresá tu nombre de usuario.<br>";
+  }
+  if (empty($password)) {
+    $mensaje .= 'Por favor ingresá tu contraseña.<br>';
   }
 
   return $mensaje;

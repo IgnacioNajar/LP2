@@ -15,11 +15,9 @@ $miConexion = ConexionBD();
 $mensaje = '';
 
 if (!$miConexion) {
-  $mensaje = 'Error al conectar con la base de datos';
+  echo 'Error al conectar con la base de datos.';
   exit;
 }
-
-$username = '';
 
 if (isset($_POST['boton_login'])) {
   $username = trim($_POST['username'] ?? '');
@@ -32,7 +30,7 @@ if (isset($_POST['boton_login'])) {
 
     if (!empty($usuarioLogueado)) {
       if ($usuarioLogueado['activo'] == 0) {
-        $mensaje = 'Usted no se encuentra activo en el sistema';
+        $mensaje = 'Usted no se encuentra activo en el sistema.';
       } else {
         $_SESSION['usuario'] = $usuarioLogueado;
         header('Location: index.php');
@@ -40,7 +38,7 @@ if (isset($_POST['boton_login'])) {
         exit;
       }
     } else {
-      $mensaje = 'Los datos ingresados son incorrectos, ingrese nuevamente';
+      $mensaje = 'Los datos ingresados son incorrectos, ingreselos nuevamente.';
       registrarLog("Intento de inicio de sesión fallido para el usuario: $username", 'ERROR');
     }
   }
@@ -93,7 +91,7 @@ if (isset($_POST['boton_login'])) {
                                             <div class="input-group has-validation">
                                                 <span class="input-group-text" id="inputGroupPrepend">@</span>
                                                 <input class="form-control" id="yourUsername" name="username" required
-                                                value="<?= htmlspecialchars($username, ENT_QUOTES); ?>">
+                                                value="<?= isset($_POST['username']) ?htmlspecialchars($username, ENT_QUOTES) : ''; ?>">
                                                 <div class="invalid-feedback">Ingresa tu usuario</div>
                                             </div>
                                         </div>
