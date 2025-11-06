@@ -298,7 +298,7 @@
   }
 
   /**
-   * Mostrar / ocultar contraseña en el login — versión robusta
+   * Mostrar / ocultar contraseña en formularios
    */
   (function () {
     document.addEventListener('DOMContentLoaded', () => {
