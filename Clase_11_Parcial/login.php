@@ -107,8 +107,8 @@ if (isset($_POST['boton_login'])) {
                           required>
                         <button
                           type="button"
-                          class="btn btn-outline-secondary"
-                          id="togglePassword"
+                          class="btn btn-outline-secondary pw-toggle"
+                          data-target="#yourPassword"
                           tabindex="-1">
                           <i class="bi bi-eye"></i>
                         </button>
