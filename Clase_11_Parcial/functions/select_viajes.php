@@ -39,3 +39,4 @@ function listarViajes($vConexion)
   $check->free();
   return $viajes;
 }
+?>

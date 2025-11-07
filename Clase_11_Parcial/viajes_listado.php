@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 if (!isset($_SESSION['usuario'])) {
   header('Location: login.php');
 }
@@ -10,6 +11,12 @@ require_once('functions/conexion.php');
 $monto = '';
 
 $conexion = conexionBd();
+
+if (!$miConexion) {
+  echo 'Error al conectar con la base de datos.';
+  exit;
+}
+
 $viajes = listarViajes($conexion);
 ?>
 

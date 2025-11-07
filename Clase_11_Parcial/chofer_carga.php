@@ -11,13 +11,16 @@ if (!isset($_SESSION['usuario'])) {
   exit;
 }
 
-$usuario = $_SESSION['usuario'];
-
 require_once('functions/conexion.php');
 require_once('functions/validar_registro_chofer.php');
 require_once('functions/insertar_chofer.php');
 
 $miConexion = conexionBd();
+
+if (!$miConexion) {
+  echo 'Error al conectar con la base de datos.';
+  exit;
+}
 
 if (isset($_POST['boton_registrar'])) {
   $clase = 'warning';
@@ -40,9 +43,10 @@ if (isset($_POST['boton_registrar'])) {
 
       header('Location: chofer_carga.php?exito=1');
       exit;
-    } else {
+    } elseif ($choferRegistrado == null) {
       $mensaje = 'Este nombre de usuario ya existe. Pruebe con otro.';
-      registrarLog("Intento de inicio de sesión fallido para el usuario: $username", 'ERROR');
+    } else {
+      $mensaje = 'Error al registrar el chofer.';
     }
   }
 }
@@ -87,7 +91,7 @@ if (isset($_POST['boton_registrar'])) {
               <h5 class="card-title">Ingresa los datos</h5>
               <div class="alert alert-info alert-dismissible fade show" role="alert">
                 <i class="bi bi-info-circle me-1"></i>
-                Los campos indicados con (*) son requeridos
+                Los campos indicados con (*) son requeridos.
               </div>
 
               <?php if (!empty($mensaje)) {
@@ -106,6 +110,7 @@ if (isset($_POST['boton_registrar'])) {
 
               <form class="row g-3" method="post" autocomplete="off">
 
+                <!-- Campo Apellido -->
                 <div class="col-12">
                   <label for="apellido" class="form-label">Apellido (*)</label>
                   <input type="text" class="form-control" id="apellido" name="apellido"
@@ -113,6 +118,7 @@ if (isset($_POST['boton_registrar'])) {
                     autocomplete="off">
                 </div>
 
+                <!-- Campo Nombre -->
                 <div class="col-12">
                   <label for="nombre" class="form-label">Nombre (*)</label>
                   <input type="text" class="form-control" id="nombre" name="nombre"
@@ -120,6 +126,7 @@ if (isset($_POST['boton_registrar'])) {
                     autocomplete="off">
                 </div>
 
+                <!-- Campo DNI -->
                 <div class="col-12">
                   <label for="dni" class="form-label">DNI (*)</label>
                   <input type="text" class="form-control" id="dni" name="dni"
@@ -127,6 +134,7 @@ if (isset($_POST['boton_registrar'])) {
                     autocomplete="off">
                 </div>
 
+                <!-- Campo username -->
                 <div class="col-12">
                   <label for="user" class="form-label">Usuario</label>
                   <input type="text" class="form-control" id="user" name="username"
@@ -162,8 +170,7 @@ if (isset($_POST['boton_registrar'])) {
                       type="password"
                       name="repeatPassword"
                       class="form-control"
-                      id="repeatPassword"
-                      required>
+                      id="repeatPassword">
                     <button
                       type="button"
                       class="btn btn-outline-secondary pw-toggle"
@@ -174,6 +181,7 @@ if (isset($_POST['boton_registrar'])) {
                   </div>
                 </div>
 
+                <!-- Botones -->
                 <div class="text-center">
                   <a href="index.php" class="btn btn-primary">Volver al inicio</a>
                   <button type="reset" class="btn btn-secondary">Limpiar Campos</button>

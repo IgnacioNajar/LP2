@@ -1,6 +1,5 @@
 <?php
 include_once('log.php');
-include_once('conexion.php');
 
 function insertarChofer($vConexion, $apellido, $nombre, $dni, $usuario, $clave)
 {
@@ -27,7 +26,7 @@ function insertarChofer($vConexion, $apellido, $nombre, $dni, $usuario, $clave)
     $check->close();
 
     if ($existe > 0) {
-      return false;
+      return null;
     }
 
     $stmt = $vConexion->prepare(
@@ -42,7 +41,7 @@ function insertarChofer($vConexion, $apellido, $nombre, $dni, $usuario, $clave)
     $stmt->close();
     return true;
   } catch (mysqli_sql_exception $e) {
-    registrarLog("Intento de cargar chofer fallido" . $e->getMessage(), 'ERROR');
+    registrarLog("Intento de insertar chofer fallido" . $e->getMessage(), 'ERROR');
     return false;
   }
 }

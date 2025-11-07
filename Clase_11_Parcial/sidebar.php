@@ -14,7 +14,7 @@
             </a>
             <ul id="forms-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="camion_carga.php" class="active">
+                    <a href="transporte_carga.php" class="active">
                         <i class="bi bi-file-earmark-plus"></i><span>Cargar nuevo transporte</span>
                     </a>
                 </li>

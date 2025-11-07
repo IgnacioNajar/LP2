@@ -1,67 +1,50 @@
 <?php
 include_once('log.php');
-include_once('conexion.php');
+require_once('select_marca.php');
 
-function InsertarUsuarios($vConexion)
+function insertarTransporte($vConexion, $marca, $modelo, $anio, $patente, $habilitado)
 {
   mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
   date_default_timezone_set('America/Argentina/Buenos_Aires');
 
   $vConexion->query("SET time_zone = '-3:00'");
 
+  $marcas = listarMarcas($vConexion);
+
+  foreach ($marcas as $elemento) {
+    if ($marca == $elemento['denominacion']) {
+      $marcaId = $elemento['id'];
+    }
+  }
+
   try {
-    $nombre = strip_tags(trim($_POST['nombre'] ?? ''));
-    $apellido = strip_tags(trim($_POST['apellido'] ?? ''));
-    $usuario = strip_tags(trim($_POST['usuario'] ?? ''));
-    $clave = $_POST['password'] ?? '';
-    $activo = 1;
-    $nivelId = 3;
-    $imagen = 'bellota.jpg';
-
-    // 🔹 (Opcional) Reiniciar el autoincrement si la tabla está vacía
-    //$vConexion->query("ALTER TABLE usuario AUTO_INCREMENT = 1");
-
-    $claveHash = password_hash($clave, PASSWORD_DEFAULT);
-
     $existe = 0;
 
-    $check = $vConexion->prepare("SELECT COUNT(*) FROM usuario WHERE usuario = ?");
-    $check->bind_param("s", $usuario);
+    $check = $vConexion->prepare("SELECT COUNT(*) FROM transporte WHERE patente = ?");
+    $check->bind_param("s", $patente);
     $check->execute();
     $check->bind_result($existe);
     $check->fetch();
     $check->close();
 
     if ($existe > 0) {
-      echo "⚠️ El usuario '$usuario' ya existe.";
-      return false;
+      return null;
     }
 
     $stmt = $vConexion->prepare(
-      "INSERT INTO usuario (nombre, apellido, usuario, clave, activo, nivelId, fechaCreacion, imagen)
-             VALUES (?, ?, ?, ?, ?, ?, NOW(), ?)"
+      "INSERT INTO transporte (marcaId, modelo, anio, patente, disponible)
+      VALUES (?, ?, ?, ?, ?)"
     );
-    $stmt->bind_param("ssssiis", $nombre, $apellido, $usuario, $claveHash, $activo, $nivelId, $imagen);
+    $stmt->bind_param("isisi", $marcaId, $modelo, $anio, $patente, $habilitado);
     $stmt->execute();
 
-    registrarLog("Usuario insertado correctamente: $usuario", 'INFO');
-    echo "✅ Usuario insertado correctamente: $usuario";
+    registrarLog("Transporte insertado correctamente: $marcaId - $modelo - $patente", 'INFO');
 
     $stmt->close();
     return true;
   } catch (mysqli_sql_exception $e) {
-    registrarLog('❌ Error al insertar usuario: ' . $e->getMessage(), 'ERROR');
-    echo "❌ Error al insertar usuario: " . $e->getMessage();
+    registrarLog("Intento de insertar transporte fallido" . $e->getMessage(), 'ERROR');
     return false;
   }
 }
-
-$conexion = conexionBd();
-
-if ($conexion) {
-  $conexion->query("SET time_zone = '-3:00'");
-  InsertarUsuarios($conexion);
-  $conexion->close();
-} else {
-  echo '❌ No se pudo establecer conexión con la base de datos.';
-}
+?>

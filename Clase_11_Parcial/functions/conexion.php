@@ -16,3 +16,5 @@ function conexionBd($host = 'db', $user = 'nacho', $password = '1234', $database
     return null;
   }
 }
+
+//$vConexion->query("ALTER TABLE usuario AUTO_INCREMENT = 1");
