@@ -23,16 +23,9 @@ function validarCamposRegistroViaje($chofer, $transporte, $fecha, $destino, $cos
   } else {
     $fechaValida = DateTime::createFromFormat('Y-m-d', $fecha);
     $erroresFecha = DateTime::getLastErrors();
-
+    
     if (!$fechaValida || !empty($erroresFecha['warning_count']) || !empty($erroresFecha['error_count'])) {
       $mensaje .= 'La fecha ingresada no tiene un formato válido (AAAA-MM-DD).<br>';
-    } else {
-      $fechaActual = new DateTime('today', new DateTimeZone('America/Argentina/Buenos_Aires'));
-      $fechaIngresada = new DateTime($fecha, new DateTimeZone('America/Argentina/Buenos_Aires'));
-
-      if ($fechaIngresada < $fechaActual) {
-        $mensaje .= 'La fecha programada no puede ser anterior a hoy.<br>';
-      }
     }
   }
 

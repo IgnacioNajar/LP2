@@ -25,7 +25,7 @@ function listarViajes($vConexion)
     while ($fila = $check->fetch_assoc()) {
       $viajes[] = [
         'id'           => $fila['id'],
-        'fechaViaje'   => date('d/m/Y', strtotime($fila['fechaViaje'])),
+        'fechaViaje'   => $fila['fechaViaje'],
         'costoViaje'   => number_format($fila['costoViaje'], 2, ',', '.'),
         'montoChofer'  => number_format($fila['montoChofer'], 2, ',', '.'),
         'porcentaje'   => number_format($fila['porcentaje'], 2, ',', '.'),

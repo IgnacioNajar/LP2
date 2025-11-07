@@ -9,6 +9,7 @@ $usuario = $_SESSION['usuario'];
 
 require_once('functions/select_viaje.php');
 require_once('functions/conexion.php');
+require_once('functions/obtener_estado_viaje.php');
 
 $monto = '';
 
@@ -78,11 +79,13 @@ $viajes = listarViajes($miConexion);
                   </tr>
                 </thead>
                 <tbody>
-                  <?php foreach ($viajes as $indice => $viaje): ?>
-                    <tr class="table-success" data-bs-toggle="tooltip" data-bs-placement="left"
-                      data-bs-original-title="Viaje realizado">
+                  <?php foreach ($viajes as $indice => $viaje):
+                    $estadoViaje = obtenerEstadoViaje($viaje['fechaViaje']);
+                    ?>
+                    <tr class="table-<?= $estadoViaje['estado']; ?>" data-bs-toggle="tooltip" data-bs-placement="left"
+                      data-bs-original-title="<?= $estadoViaje['mensaje']; ?>">
                       <th scope="row"><?= $indice + 1; ?></th>
-                      <td><?= $viaje['fechaViaje']; ?></td>
+                      <td><?= date('d/m/Y', strtotime($viaje['fechaViaje'])) ?></td>
                       <td><?= $viaje['destino']; ?></td>
                       <td><?= $viaje['transporte']; ?></td>
                       <td><?= $viaje['nombreChofer']; ?></td>
