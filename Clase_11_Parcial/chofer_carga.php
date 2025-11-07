@@ -94,6 +94,7 @@ if (isset($_POST['boton_registrar'])) {
                 Los campos indicados con (*) son requeridos.
               </div>
 
+              <!-- Mensaje de exito o error -->
               <?php if (!empty($mensaje)) {
                 if ($clase == 'warning') { ?>
                   <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -134,7 +135,7 @@ if (isset($_POST['boton_registrar'])) {
                     autocomplete="off">
                 </div>
 
-                <!-- Campo username -->
+                <!-- Campo Username -->
                 <div class="col-12">
                   <label for="user" class="form-label">Usuario</label>
                   <input type="text" class="form-control" id="user" name="username"
@@ -142,7 +143,7 @@ if (isset($_POST['boton_registrar'])) {
                     autocomplete="new-username">
                 </div>
 
-                <!-- Campo contraseña -->
+                <!-- Campo Contraseña -->
                 <div class="col-12">
                   <label for="pass" class="form-label">Clave</label>
                   <div class="input-group">
@@ -162,7 +163,7 @@ if (isset($_POST['boton_registrar'])) {
                   </div>
                 </div>
 
-                <!-- Campo repetir contraseña -->
+                <!-- Campo Repetir Contraseña -->
                 <div class="col-12">
                   <label for="repeatPassword" class="form-label">Repetir contraseña</label>
                   <div class="input-group">

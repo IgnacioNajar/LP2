@@ -85,7 +85,7 @@ $usuario = $_SESSION['usuario'];
 
                                 <tr>
                                     <th>Nivel:</th>
-                                    <td><?= htmlspecialchars($usuario['nivelNombre']); ?></td>
+                                    <td><?= htmlspecialchars($usuario['nivelDenominacion']); ?></td>
                                 </tr>
                             </table>
                         </div>

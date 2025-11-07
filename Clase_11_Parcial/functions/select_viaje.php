@@ -10,11 +10,11 @@ function listarViajes($vConexion)
           v.costoViaje AS costoViaje,
           v.montoChofer AS montoChofer,
           v.porcentaje as porcentaje,
-          CONCAT(c.apellido, ', ', c.nombre) as nombreChofer,
+          CONCAT(u.apellido, ', ', u.nombre) as nombreChofer,
           d.denominacion as destino,
-          CONCAT(m.denominacion, ' - ', t.modelo, ' -', t.patente) as transporte
+          CONCAT(m.denominacion, ' - ', t.modelo, ' - ', t.patente) as transporte
       FROM viaje v
-      JOIN usuario c ON v.choferId = c.id
+      JOIN usuario u ON v.choferId = u.id
       JOIN transporte t ON v.transporteId = t.id
       JOIN destino d ON v.destinoId = d.id
       JOIN marca m ON t.marcaId = m.id
@@ -28,7 +28,7 @@ function listarViajes($vConexion)
         'fechaViaje'   => date('d/m/Y', strtotime($fila['fechaViaje'])),
         'costoViaje'   => number_format($fila['costoViaje'], 2, ',', '.'),
         'montoChofer'  => number_format($fila['montoChofer'], 2, ',', '.'),
-        'porcentaje'   => $fila['porcentaje'],
+        'porcentaje'   => number_format($fila['porcentaje'], 2, ',', '.'),
         'nombreChofer' => $fila['nombreChofer'],
         'destino'      => $fila['destino'],
         'transporte'   => $fila['transporte'],

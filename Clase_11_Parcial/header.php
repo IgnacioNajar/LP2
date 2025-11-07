@@ -21,7 +21,7 @@
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
                         <h6><?= $usuario['nombre'] . ' ' . $usuario['apellido'] ?></h6>
-                        <span><?= $usuario['nivelNombre'] ?></span>
+                        <span><?= $usuario['nivelDenominacion'] ?></span>
                     </li>
                     <li>
                         <hr class="dropdown-divider">

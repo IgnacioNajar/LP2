@@ -16,7 +16,8 @@ function datosLogin($vUsuario, $vClave, $vConexion)
             u.fechaCreacion as fechaCreacion,
             u.nivelId AS nivelId,
             u.imagen AS imagen,
-            n.denominacion AS nombreNivel
+            u.nivelId as nivelId,
+            n.denominacion AS nivelDenominacion
         FROM usuario u
         JOIN nivel n ON u.nivelId = n.id
         WHERE u.usuario = ?"
@@ -30,17 +31,18 @@ function datosLogin($vUsuario, $vClave, $vConexion)
 
     if ($data && password_verify($vClave, $data['clave_hash'])) {
         $usuario = [
-            'id'            => $data['id'],
-            'nombre'        => $data['nombre'],
-            'apellido'      => $data['apellido'],
-            'dni'           => $data['dni'],
-            'userName'      => $data['usuario'],
-            'nivel'         => $data['nivelId'],
-            'fechaCreacion' => date('d/m/Y', strtotime($data['fechaCreacion'])),
-            'nivelNombre'   => $data['nombreNivel'],
-            'sexo'          => $data['sexo'],
-            'activo'        => $data['activo'],
-            'imagen'        => $data['imagen'] ?: 'profile-img.jpg'
+            'id'                => $data['id'],
+            'nombre'            => $data['nombre'],
+            'apellido'          => $data['apellido'],
+            'dni'               => $data['dni'],
+            'userName'          => $data['usuario'],
+            'nivel'             => $data['nivelId'],
+            'fechaCreacion'     => date('d/m/Y', strtotime($data['fechaCreacion'])),
+            'nivelDenominacion' => $data['nivelDenominacion'],
+            'nivelId'           => $data['nivelId'],
+            'sexo'              => $data['sexo'],
+            'activo'            => $data['activo'],
+            'imagen'            => $data['imagen'] ?: 'profile-img.jpg'
         ];
 
         switch ($data['sexo']) {

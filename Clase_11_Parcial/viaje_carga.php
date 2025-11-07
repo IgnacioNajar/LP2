@@ -1,3 +1,62 @@
+<?php
+session_start();
+
+if (isset($_GET['exito'])) {
+  $clase = 'success';
+  $mensaje = 'El viaje se ha registrado correctamente.';
+}
+
+if (!isset($_SESSION['usuario'])) {
+  header('Location: login.php');
+  exit;
+}
+
+require_once('functions/conexion.php');
+require_once('functions/select_chofer.php');
+require_once('functions/select_transporte.php');
+require_once('functions/select_destino.php');
+require_once('functions/validar_registro_viaje.php');
+require_once('functions/insertar_viaje.php');
+
+$miConexion = conexionBd();
+
+if (!$miConexion) {
+  echo 'Error al conectar con la base de datos.';
+  exit;
+}
+
+$choferes = listarChoferes($miConexion);
+$transportes = listarTransportes($miConexion);
+$destinos = listarDestinos($miConexion);
+
+if (isset($_POST['boton_registrar'])) {
+  $clase = 'warning';
+
+  $choferDNI = strip_tags(trim($_POST['chofer'] ?? ''));
+  $transporte = strip_tags(trim($_POST['transporte'] ?? ''));
+  $fecha = strip_tags(trim($_POST['fecha'] ?? ''));
+  $destino = strip_tags(trim($_POST['destino'] ?? ''));
+  $costoViaje = strip_tags(trim($_POST['costoViaje'] ?? ''));
+  $porcentajeChofer = strip_tags(trim($_POST['porcentajeChofer'] ?? ''));
+
+  $mensaje = validarCamposRegistroViaje($choferDNI, $transporte, $fecha, $destino, $costoViaje, $porcentajeChofer);
+
+  if (empty($mensaje)) {
+    $viajeRegistrado = insertarViaje($miConexion, $choferDNI, $transporte, $fecha, $destino, $costoViaje, $porcentajeChofer);
+
+    if ($viajeRegistrado) {
+      $clase = 'success';
+      $mensaje = 'El viaje se ha registrado correctamente.';
+
+      header('Location: viaje_carga.php?exito=1');
+      exit;
+    } else {
+      $mensaje = 'Error al registrar el viaje.';
+    }
+  }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,135 +64,162 @@
 
 <body>
 
-    <!-- ======= Header ======= -->
-    <?php require_once('header.php'); ?>
-    <!-- End Header -->
+  <!-- ======= Header ======= -->
+  <?php require_once('header.php'); ?>
+  <!-- End Header -->
 
-    <!-- ======= Sidebar ======= -->
-    <?php require_once('sidebar.php'); ?>
-    <!-- End Sidebar-->
+  <!-- ======= Sidebar ======= -->
+  <?php require_once('sidebar.php'); ?>
+  <!-- End Sidebar-->
 
-    <!-- ======= Main ======= -->
-    <main id="main" class="main">
+  <!-- ======= Main ======= -->
+  <main id="main" class="main">
 
-        <div class="pagetitle">
-            <h1>Registrar un nuevo viaje</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item">Viajes</li>
-                    <li class="breadcrumb-item active">Carga</li>
-                </ol>
-            </nav>
-        </div><!-- End Page Title -->
+    <div class="pagetitle">
+      <h1>Registrar un nuevo viaje</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item">Viajes</li>
+          <li class="breadcrumb-item active">Carga</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
 
-        <section class="section">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Ingresa los datos</h5>
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Ingresa los datos</h5>
 
-                            <div class="alert alert-info alert-dismissible fade show" role="alert">
-                                <i class="bi bi-info-circle me-1"></i>
-                                Los campos indicados con (*) son requeridos
-                            </div>
-                            <!--
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              <div class="alert alert-info alert-dismissible fade show" role="alert">
+                <i class="bi bi-info-circle me-1"></i>
+                Los campos indicados con (*) son requeridos
+              </div>
+
+              <?php if (!empty($mensaje)) {
+                if ($clase == 'warning') { ?>
+                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
                     <i class="bi bi-exclamation-triangle me-1"></i>
-                    Mensajes de Alerta por validaciones
-                </div>
-
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <?= $mensaje; ?>
+                  </div>
+                <?php } else { ?>
+                  <div class="alert alert-success alert-dismissible fade show" role="alert">
                     <i class="bi bi-check-circle me-1"></i>
-                    Los datos se guardaron correctamente!
+                    <?= $mensaje; ?>
+                  </div>
+              <?php }
+              } ?>
+
+              <form class="row g-3" method="post">
+
+                <!-- Campo Chofer -->
+                <div class="col-12">
+                  <label for="selector" class="form-label">Chofer (*)</label>
+                  <select class="form-select" aria-label="Selector" id="selector" name="chofer">
+                    <option selected="" value="">Selecciona una opcion</option>
+                    <?php foreach ($choferes as $chofer): ?>
+                      <option
+                        value="<?= $chofer['dni']; ?>"
+                        <?= isset($_POST['chofer']) && $_POST['chofer'] === $chofer['dni'] ? 'selected' : ''; ?>>
+                        <?= $chofer['apellido'] . ', ' . $chofer['nombre'] . ' (' . $chofer['dni'] . ')'; ?>
+                      </option>
+                    <?php endforeach; ?>
+                  </select>
                 </div>
--->
-                            <form class="row g-3">
-                                <div class="col-12">
-                                    <label for="selector" class="form-label">Chofer (*)</label>
-                                    <select class="form-select" aria-label="Selector" id="selector">
-                                        <option selected="">Selecciona una opcion</option>
-                                        <option>Perez, Juan (DNI 22333444) </option>
-                                        <option>Alvarez, Marcos (DNI 33444555) </option>
-                                        <option>Rodriguez, Ariel (DNI 44555666) </option>
-                                        <option>Zapata, Joaquin (DNI 55666777) </option>
-                                    </select>
-                                </div>
-                                <div class="col-12">
-                                    <label for="selector" class="form-label">Transporte (*)</label>
-                                    <select class="form-select" aria-label="Selector" id="selector">
-                                        <option selected="">Selecciona una opcion</option>
-                                        <option>Iveco - Daily Furgon - AC206JK </option>
-                                        <option>Volkswagen - Delivery - AC506AA </option>
-                                        <option>Scania - Serie P - AA322CX </option>
-                                        <option>Iveco - Daily Chasis - AD698HA </option>
-                                    </select>
-                                </div>
 
-                                <div class="col-12">
-                                    <label for="fecha" class="form-label">Fecha programada (*)</label>
-                                    <input type="date" class="form-control" id="fecha">
-                                </div>
-                                <div class="col-12">
-                                    <label for="selector" class="form-label">Destino (*)</label>
-                                    <select class="form-select" aria-label="Selector" id="selector">
-                                        <option selected="">Selecciona una opcion</option>
-                                        <option>Rio Primero </option>
-                                        <option>Capilla del Monte</option>
-                                        <option>San Francisco </option>
-                                        <option>Morteros </option>
-                                        <option>Toledo </option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="costo" class="form-label">Costo (*)</label>
-                                    <input type="text" class="form-control" id="costo">
-                                </div>
-                                <div class="col-lg-6">
-                                    <label for="porc" class="form-label">Porcentaje chofer (*)</label>
-                                    <input type="text" class="form-control" id="porc">
-                                </div>
-
-
-
-
-
-                                <div class="text-center">
-                                    <button class="btn btn-primary">Registrar</button>
-                                    <button type="reset" class="btn btn-secondary">Limpiar Campos</button>
-                                    <a href="index.html" class="text-primary fw-bold">Volver al index</a>
-                                </div>
-                            </form><!-- Vertical Form -->
-
-                        </div>
-                    </div>
+                <!-- Campo Transporte -->
+                <div class="col-12">
+                  <label for="selector" class="form-label">Transporte (*)</label>
+                  <select class="form-select" aria-label="Selector" id="selector" name="transporte">
+                    <option selected="" value="">Selecciona una opcion</option>
+                    <?php foreach ($transportes as $transporte): ?>
+                      <option
+                        value="<?= $transporte['patente']; ?>"
+                        <?= isset($_POST['transporte']) && $_POST['transporte'] === $transporte['patente'] ? 'selected' : ''; ?>>
+                        <?= $transporte['marca'] . ' - ' . $transporte['modelo'] . ' - ' . $transporte['patente']; ?>
+                      </option>
+                    <?php endforeach; ?>
+                  </select>
                 </div>
+
+                <!-- Campo Fecha -->
+                <div class="col-12">
+                  <label for="fecha" class="form-label">Fecha programada (*)</label>
+                  <input type="date" class="form-control" id="fecha" name="fecha"
+                    value="<?php
+                            if (isset($_POST['fecha']) && strtotime($_POST['fecha'])) {
+                              echo htmlspecialchars(date('Y-m-d', strtotime($_POST['fecha'])), ENT_QUOTES);
+                            }
+                            ?>">
+                </div>
+
+                <!-- Campo Destino -->
+                <div class="col-12">
+                  <label for="selector" class="form-label">Destino (*)</label>
+                  <select class="form-select" aria-label="Selector" id="selector" name="destino">
+                    <option selected="" value="">Selecciona una opcion</option>
+                    <?php foreach ($destinos as $destino): ?>
+                      <option
+                        value="<?= $destino['denominacion']; ?>"
+                        <?= isset($_POST['destino']) && $_POST['destino'] === $destino['denominacion'] ? 'selected' : ''; ?>>
+                        <?= $destino['denominacion']; ?>
+                      </option>
+                    <?php endforeach; ?>
+                  </select>
+                </div>
+
+                <!-- Campo Costo -->
+                <div class="col-md-6">
+                  <label for="costo" class="form-label">Costo (*)</label>
+                  <input type="number" class="form-control" id="costo" name="costoViaje"
+                    value="<?= isset($_POST['costoViaje']) ? htmlspecialchars($costoViaje, ENT_QUOTES) : ''; ?>">
+                </div>
+
+                <!-- Campo Porcentaje Chofer -->
+                <div class="col-lg-6">
+                  <label for="porc" class="form-label">Porcentaje chofer (*)</label>
+                  <input type="number" class="form-control" id="porc" name="porcentajeChofer"
+                    value="<?= isset($_POST['porcentajeChofer']) ? htmlspecialchars($porcentajeChofer, ENT_QUOTES) : ''; ?>">
+                </div>
+
+                <!-- Botones -->
+                <div class="text-center">
+                  <a href="index.php" class="btn btn-primary">Volver al inicio</a>
+                  <button type="reset" class="btn btn-secondary">Limpiar Campos</button>
+                  <button class="btn btn-success" type="submit" name="boton_registrar">Registrar</button>
+                </div>
+              </form><!-- Vertical Form -->
+
             </div>
-        </section>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    </main><!-- End #main -->
+  </main><!-- End #main -->
 
-    <!-- ======= Footer ======= -->
-    <?php require_once('footer.php'); ?>
-    <!-- End Footer -->
+  <!-- ======= Footer ======= -->
+  <?php require_once('footer.php'); ?>
+  <!-- End Footer -->
 
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
 
-    <!-- Vendor JS Files
+  <!-- Vendor JS Files
   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script> -->
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- <script src="assets/vendor/chart.js/chart.umd.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- <script src="assets/vendor/chart.js/chart.umd.js"></script>
   <script src="assets/vendor/echarts/echarts.min.js"></script>
   <script src="assets/vendor/quill/quill.js"></script>
   <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>-->
-    <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
 
-    <!--<script src="assets/vendor/php-email-form/validate.js"></script> -->
+  <!--<script src="assets/vendor/php-email-form/validate.js"></script> -->
 
-    <!-- Template Main JS File -->
-    <script src="assets/js/main.js"></script>
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
 
 </body>
 
