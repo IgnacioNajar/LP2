@@ -44,7 +44,7 @@ $usuario = $_SESSION['usuario'];
                 <div class="col-lg-4">
                     <div class="card info-card">
                         <div class="card-body text-center">
-                            <img 
+                            <img
                                 src="assets/img/<?= htmlspecialchars($usuario['imagen'] ?? 'profile-img.jpg'); ?>"
                                 class="rounded-circle mb-3"
                                 alt="Usuario"
@@ -72,12 +72,12 @@ $usuario = $_SESSION['usuario'];
                                     <td><?= htmlspecialchars($usuario['apellido']); ?></td>
                                 </tr>
                                 <tr>
-                                    <th>DNI:</th>
-                                    <td><?= htmlspecialchars($usuario['dni']); ?></td>
-                                </tr>
-                                <tr>
                                     <th>Usuario:</th>
                                     <td><?= htmlspecialchars($usuario['userName']); ?></td>
+                                </tr>
+                                <tr>
+                                    <th>DNI:</th>
+                                    <td><?= htmlspecialchars($usuario['dni']); ?></td>
                                 </tr>
                                 <tr>
                                     <th>Sexo:</th>
@@ -87,7 +87,6 @@ $usuario = $_SESSION['usuario'];
                                     <th>Fecha creación:</th>
                                     <td><?= htmlspecialchars($usuario['fechaCreacion']); ?></td>
                                 </tr>
-
                                 <tr>
                                     <th>Nivel:</th>
                                     <td><?= htmlspecialchars($usuario['nivelDenominacion']); ?></td>
