@@ -60,3 +60,4 @@ function datosLogin($vUsuario, $vClave, $vConexion)
 
     return $usuario;
 }
+?>
