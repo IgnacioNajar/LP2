@@ -203,7 +203,6 @@ if (isset($_POST['boton_registrar'])) {
                                     </div>
                                 </div>
 
-
                                 <!-- Botones -->
                                 <div class="text-center">
                                     <a href="index.php" class="btn btn-primary">Volver al inicio</a>
