@@ -1,8 +1,8 @@
 <?php
-date_default_timezone_set('America/Argentina/Buenos_Aires');
-
 function obtenerEstadoViaje($fechaViaje)
 {
+  date_default_timezone_set('America/Argentina/Buenos_Aires');
+
   $fechaViaje = date("Y-m-d", strtotime($fechaViaje));
   $fechaActual = date("Y-m-d");
   $fechaManiana = date("Y-m-d", strtotime("+1 day"));

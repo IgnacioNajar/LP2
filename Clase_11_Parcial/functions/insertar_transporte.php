@@ -42,6 +42,7 @@ function insertarTransporte($vConexion, $marca, $modelo, $anio, $patente, $habil
 
     $stmt->close();
     return true;
+    
   } catch (mysqli_sql_exception $e) {
     registrarLog("Intento de insertar transporte fallido" . $e->getMessage(), 'ERROR');
     return false;

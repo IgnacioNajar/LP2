@@ -13,7 +13,6 @@ function insertarChofer($vConexion, $apellido, $nombre, $dni, $usuario, $clave)
     $nivelId = 3;
     $sexo = 'M';
     $imagen = 'profile-img.jpg';
-
     $claveHash = password_hash($clave, PASSWORD_DEFAULT);
 
     $existe = 0;

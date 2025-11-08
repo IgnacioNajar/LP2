@@ -40,7 +40,6 @@ function insertarViaje($vConexion, $choferDNI, $transporte, $fecha, $destino, $c
   $montoChofer = $costoViaje * ($porcentajeChofer / 100);
 
   try {
-
     $stmt = $vConexion->prepare(
       "INSERT INTO viaje (choferId, transporteId, fecha, destinoId, costoViaje, montoChofer, porcentaje)
       VALUES (?, ?, ?, ?, ?, ?, ?)"
@@ -52,6 +51,7 @@ function insertarViaje($vConexion, $choferDNI, $transporte, $fecha, $destino, $c
 
     $stmt->close();
     return true;
+
   } catch (mysqli_sql_exception $e) {
     registrarLog("Intento de insertar viaje fallido" . $e->getMessage(), 'ERROR');
     return false;

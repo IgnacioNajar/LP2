@@ -57,7 +57,7 @@ $usuario = $_SESSION['usuario'];
                                             <p>Puedes seleccionar el menu de la izquierda.</p>
                                             <p>Recuerda que para el Final o para Regularidad Extraordinaria, debes presentar el panel completo.</p>
                                         </div>
-                                      </div>
+                                    </div>
                                 </div>
                             </div>
 

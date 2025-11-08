@@ -44,8 +44,13 @@ $usuario = $_SESSION['usuario'];
                 <div class="col-lg-4">
                     <div class="card info-card">
                         <div class="card-body text-center">
-                            <img src="assets/img/<?= htmlspecialchars($usuario['imagen'] ?? 'profile-img.jpg'); ?>"
-                            class="rounded-circle mb-3" alt="Usuario" style="max-width:150px;">
+                            <img 
+                                src="assets/img/<?= htmlspecialchars($usuario['imagen'] ?? 'profile-img.jpg'); ?>"
+                                class="rounded-circle mb-3"
+                                alt="Usuario"
+                                style="max-width:150px;"
+                                onerror="this.onerror=null; this.src='assets/img/profile-img.jpg';"
+                            >
                             <h3 style="margin-bottom: 0;"><?= htmlspecialchars($usuario['saludo']); ?></h3>
                             <h2 style="margin-bottom: 0; font-weight: bold;"><?= htmlspecialchars($usuario['nombre'] . ' ' . $usuario['apellido']); ?></h2>
                         </div>
@@ -112,4 +117,5 @@ $usuario = $_SESSION['usuario'];
     <script src="assets/js/main.js"></script>
 
 </body>
+
 </html>

@@ -53,7 +53,7 @@ function datosLogin($vUsuario, $vClave, $vConexion)
                 $usuario['saludo'] = 'Bienvenido';
                 break;
             default:
-                $usuario['saludo'] = 'Hola';
+                $usuario['saludo'] = 'Bienvenid@';
                 break;
         }
     }
