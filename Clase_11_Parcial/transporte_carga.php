@@ -11,6 +11,17 @@ if (!isset($_SESSION['usuario'])) {
     exit;
 }
 
+$usuario = $_SESSION['usuario'];
+
+if ($usuario['nivelId'] == 3) {
+    echo "  <script>
+                alert('No tenés permisos para acceder a esta página.');
+                window.location.href='index.php';
+            </script>
+        ";
+    exit;
+}
+
 // Incluimos los scripts que contienen las funciones necesarias
 require_once('functions/conexion.php');
 require_once('functions/select_marca.php');
