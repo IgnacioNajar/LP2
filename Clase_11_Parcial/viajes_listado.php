@@ -34,7 +34,10 @@ $viajes = listarViajes($miConexion);
     <!-- End Header -->
 
     <!-- ======= Sidebar ======= -->
-    <?php require_once('sidebar.php'); ?>
+    <?php
+    $paginaActual = 'viajes_listado';
+    require_once('sidebar.php');
+    ?>
     <!-- End Sidebar-->
 
     <!-- ======= Main ======= -->

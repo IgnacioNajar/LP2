@@ -79,7 +79,10 @@ if (isset($_POST['boton_registrar'])) {
     <!-- End Header -->
 
     <!-- ======= Sidebar ======= -->
-    <?php require_once('sidebar.php'); ?>
+    <?php
+    $paginaActual = 'transporte_carga';
+    require_once('sidebar.php');
+    ?>
     <!-- End Sidebar-->
 
     <!-- ======= Main ======= -->
