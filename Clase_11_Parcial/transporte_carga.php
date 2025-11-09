@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+$mensaje = '';
+$clase = '';
+
 if (isset($_GET['exito'])) {
     $clase = 'success';
     $mensaje = 'El transporte se ha registrado correctamente.';
@@ -36,7 +39,6 @@ if (!$miConexion) {
 }
 
 $marcas = listarMarcas($miConexion);
-$mensaje = '';
 
 if (isset($_POST['boton_registrar'])) {
     $clase = 'warning';

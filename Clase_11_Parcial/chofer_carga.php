@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+$mensaje = '';
+$clase = '';
+
 if (isset($_GET['exito'])) {
     $clase = 'success';
     $mensaje = 'El chofer se ha registrado correctamente.';
@@ -34,7 +37,6 @@ if (!$miConexion) {
     exit;
 }
 
-$mensaje = '';
 
 if (isset($_POST['boton_registrar'])) {
     $clase = 'warning';

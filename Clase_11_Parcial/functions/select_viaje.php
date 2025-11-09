@@ -18,7 +18,7 @@ function listarViajes($vConexion)
         JOIN transporte t ON v.transporteId = t.id
         JOIN destino d ON v.destinoId = d.id
         JOIN marca m ON t.marcaId = m.id
-        ORDER BY v.id"
+        ORDER BY v.fecha, d.denominacion"
     );
 
     if ($check && $check->num_rows > 0) {
