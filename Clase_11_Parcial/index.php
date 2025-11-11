@@ -1,7 +1,8 @@
 <?php
 session_start();
-if (empty($_SESSION['usuario'])) {
-    header('Location: functions/cerrar_sesion.php');
+
+if (!isset($_SESSION['usuario'])) {
+    header('Location: login.php');
     exit;
 }
 
