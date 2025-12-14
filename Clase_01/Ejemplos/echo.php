@@ -1,5 +1,3 @@
-<?php echo 'hola!! '; ?>
-<br />  
+<?php echo 'Hola!! '; ?>
+<br />
 <?php echo "Bienvenid@s!! "; ?>
-
-
